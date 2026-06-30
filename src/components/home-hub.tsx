@@ -19,6 +19,12 @@ const hubCards = [
     icon: Network,
   },
   {
+    title: "Start here",
+    href: "/genesismesh/start-here",
+    text: "A short explainer for people new to the Genesis Mesh thesis.",
+    icon: ShieldCheck,
+  },
+  {
     title: "SDKs",
     href: "/genesismesh/sdks",
     text: "Go, TypeScript, and .NET client paths for real integration work.",
@@ -33,7 +39,7 @@ const hubCards = [
   {
     title: "Articles",
     href: "/genesismesh/articles",
-    text: "Public Patreon articles and long-form campaign writing.",
+    text: "Long-form campaign articles and founder notes.",
     icon: FileText,
   },
 ];
@@ -65,10 +71,10 @@ export function HomeHub() {
             </p>
             <div className="mt-9 flex flex-col gap-3 sm:flex-row">
               <Link
-                href="/genesismesh"
+                href="/genesismesh/start-here"
                 className="inline-flex h-12 items-center justify-center gap-2 rounded-md bg-[#d9ff61] px-6 text-sm font-bold text-zinc-950 transition hover:bg-white"
               >
-                Explore Genesis Mesh
+                New to Genesis Mesh? Start here
                 <ArrowRight size={18} aria-hidden="true" />
               </Link>
               <a
@@ -153,7 +159,7 @@ export function HomeHub() {
             One hub, separate paths.
           </h2>
         </div>
-        <div className="mt-10 grid gap-4 md:grid-cols-2 xl:grid-cols-4">
+        <div className="mt-10 grid gap-4 md:grid-cols-2 xl:grid-cols-5">
           {hubCards.map((card) => (
             <Link
               key={card.href}
