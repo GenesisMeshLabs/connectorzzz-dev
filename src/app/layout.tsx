@@ -24,6 +24,10 @@ export const metadata: Metadata = {
   authors: [{ name: "GenesisMesh Labs", url: "https://github.com/GenesisMeshLabs" }],
   creator: "GenesisMesh Labs",
   publisher: "GenesisMesh Labs",
+  icons: {
+    icon: "/favicon.ico",
+    shortcut: "/favicon.ico",
+  },
   keywords: [
     "Genesis Mesh",
     "Connectorzzz",
