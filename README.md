@@ -1,36 +1,58 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# connectorzzz-dev
 
-## Getting Started
+Developer and product hub for Connectorzzz systems.
 
-First, run the development server:
+The first product section is Genesis Mesh:
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+```text
+dev.connectorzzz.com/genesismesh
+dev.connectorzzz.com/genesismesh/videos
+dev.connectorzzz.com/genesismesh/articles
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## Stack
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+- Next.js App Router
+- TypeScript
+- Tailwind CSS
+- `lucide-react` icons
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## Local Development
 
-## Learn More
+```powershell
+npm ci
+npm.cmd run dev
+```
 
-To learn more about Next.js, take a look at the following resources:
+Default local URL:
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+```text
+http://localhost:3000/genesismesh
+```
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+## Content Model
 
-## Deploy on Vercel
+Genesis Mesh links, video IDs, article links, SDK cards, pillars, and campaign cards live in:
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+```text
+src/content/genesismesh.ts
+```
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+Shared UI sections live in:
+
+```text
+src/components/
+```
+
+Marketing and brand images are served from:
+
+```text
+public/images/
+```
+
+## Validation
+
+```powershell
+npm.cmd run lint
+npm.cmd run build
+```
