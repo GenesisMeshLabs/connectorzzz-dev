@@ -4,11 +4,33 @@ import { PageShell } from "@/components/site-shell";
 import { sdkCards, siteLinks } from "@/content/genesismesh";
 
 export const metadata: Metadata = {
-  title: "Genesis Mesh SDKs | Connectorzzz Dev",
+  title: "Genesis Mesh SDKs",
   description:
     "Genesis Mesh SDKs for Go, TypeScript, and .NET developers integrating portable trust into real systems.",
   alternates: {
     canonical: "/genesismesh/sdks",
+  },
+  openGraph: {
+    title: "Genesis Mesh SDKs",
+    description:
+      "Go, TypeScript, and .NET SDKs for integrating Genesis Mesh portable trust into real systems.",
+    url: "/genesismesh/sdks",
+    siteName: "Connectorzzz Dev",
+    images: [
+      {
+        url: "/images/marketing/social-card.png",
+        width: 1200,
+        height: 630,
+        alt: "Genesis Mesh SDKs",
+      },
+    ],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Genesis Mesh SDKs",
+    description:
+      "Go, TypeScript, and .NET SDKs for integrating Genesis Mesh portable trust into real systems.",
+    images: ["/images/marketing/social-card.png"],
   },
 };
 
@@ -58,6 +80,7 @@ export default function SdksPage() {
                 </span>
               </div>
               <h2 className="mt-6 text-xl font-semibold text-white">{sdk.name}</h2>
+              <p className="mt-2 font-mono text-xs text-[#d9ff61]">{sdk.repo}</p>
               <p className="mt-3 text-sm leading-6 text-zinc-400">{sdk.description}</p>
               <span className="mt-6 inline-flex items-center gap-2 text-sm font-bold text-[#d9ff61]">
                 View repository

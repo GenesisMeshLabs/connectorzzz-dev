@@ -46,6 +46,21 @@ export const metadata: Metadata = {
     description:
       "Developer and product hub for Connectorzzz systems, starting with Genesis Mesh portable trust infrastructure.",
     url: "https://dev.connectorzzz.com",
+    images: [
+      {
+        url: "/images/marketing/social-card.png",
+        width: 1200,
+        height: 630,
+        alt: "Connectorzzz Dev and Genesis Mesh portable trust infrastructure",
+      },
+    ],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Connectorzzz Dev",
+    description:
+      "Developer and product hub for Connectorzzz systems, starting with Genesis Mesh portable trust infrastructure.",
+    images: ["/images/marketing/social-card.png"],
   },
 };
 

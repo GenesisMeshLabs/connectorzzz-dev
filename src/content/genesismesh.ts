@@ -19,6 +19,7 @@ export const siteLinks = {
   genesisMesh: "https://genesismesh.connectorzzz.com/",
   githubOrg: "https://github.com/GenesisMeshLabs",
   githubCore: "https://github.com/GenesisMeshLabs/genesismesh",
+  githubCoreDocs: "https://github.com/GenesisMeshLabs/genesismesh/tree/main/docs",
   sdkGo: "https://github.com/GenesisMeshLabs/sdk-go",
   sdkTypeScript: "https://github.com/GenesisMeshLabs/sdk-typescript",
   sdkDotnet: "https://github.com/GenesisMeshLabs/sdk-dotnet",
@@ -36,6 +37,7 @@ export const navItems: NavItem[] = [
   { label: "Home", href: "/" },
   { label: "Genesis Mesh", href: "/genesismesh" },
   { label: "SDKs", href: "/genesismesh/sdks" },
+  { label: "Docs", href: "/genesismesh/docs" },
   { label: "Videos", href: "/genesismesh/videos" },
   { label: "Articles", href: "/genesismesh/articles" },
 ];
@@ -111,6 +113,7 @@ export type SdkCard = {
   name: string;
   language: string;
   href: string;
+  repo: string;
   description: string;
   icon: LucideIcon;
 };
@@ -120,6 +123,7 @@ export const sdkCards: SdkCard[] = [
     name: "SDK for Go",
     language: "Go",
     href: siteLinks.sdkGo,
+    repo: "GenesisMeshLabs/sdk-go",
     description: "Typed client for builders wiring trust checks into Go services and infrastructure.",
     icon: TerminalSquare,
   },
@@ -127,6 +131,7 @@ export const sdkCards: SdkCard[] = [
     name: "SDK for TypeScript",
     language: "TypeScript",
     href: siteLinks.sdkTypeScript,
+    repo: "GenesisMeshLabs/sdk-typescript",
     description: "Client package for web apps, tools, server routes, and developer-facing integrations.",
     icon: Braces,
   },
@@ -134,6 +139,7 @@ export const sdkCards: SdkCard[] = [
     name: ".NET SDK",
     language: "C#",
     href: siteLinks.sdkDotnet,
+    repo: "GenesisMeshLabs/sdk-dotnet",
     description: "C# client for enterprise services and Microsoft-stack integration paths.",
     icon: Code2,
   },

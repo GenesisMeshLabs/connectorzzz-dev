@@ -2,7 +2,8 @@ import Image from "next/image";
 import Link from "next/link";
 import { ArrowUpRight } from "lucide-react";
 import { BrandIcon } from "@/components/brand-icons";
-import { externalChannels, navItems, siteLinks } from "@/content/genesismesh";
+import { DesktopNav, MobileNav } from "@/components/site-navigation";
+import { externalChannels, siteLinks } from "@/content/genesismesh";
 
 export function SiteHeader() {
   return (
@@ -18,23 +19,20 @@ export function SiteHeader() {
           />
           <span className="text-sm font-semibold tracking-wide text-white">Connectorzzz Dev</span>
         </Link>
-        <nav className="hidden items-center gap-6 text-sm text-zinc-300 md:flex">
-          {navItems.map((item) => (
-            <Link key={item.href} href={item.href} className="transition hover:text-white">
-              {item.label}
-            </Link>
-          ))}
-        </nav>
-        <a
-          href={siteLinks.githubOrg}
-          className="inline-flex h-10 items-center gap-2 rounded-md bg-white px-4 text-sm font-semibold text-zinc-950 transition hover:bg-[#d9ff61]"
-          target="_blank"
-          rel="noreferrer"
-        >
-          <BrandIcon name="github" className="h-4 w-4" />
-          GitHub
-          <ArrowUpRight size={16} aria-hidden="true" />
-        </a>
+        <DesktopNav />
+        <div className="flex items-center gap-2">
+          <a
+            href={siteLinks.githubOrg}
+            className="hidden h-10 items-center gap-2 rounded-md bg-white px-4 text-sm font-semibold text-zinc-950 transition hover:bg-[#d9ff61] md:inline-flex"
+            target="_blank"
+            rel="noreferrer"
+          >
+            <BrandIcon name="github" className="h-4 w-4" />
+            GitHub
+            <ArrowUpRight size={16} aria-hidden="true" />
+          </a>
+          <MobileNav />
+        </div>
       </div>
     </header>
   );

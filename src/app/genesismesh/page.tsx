@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
-import { ArrowRight, ArrowUpRight, Code2, FileText, Play } from "lucide-react";
+import { ArrowRight, BookOpen, Code2, FileText, Play, ShieldCheck } from "lucide-react";
 import { BrandIcon } from "@/components/brand-icons";
 import { PageShell } from "@/components/site-shell";
 import { developerProof, pillars, seo, siteLinks } from "@/content/genesismesh";
@@ -36,10 +36,22 @@ export const metadata: Metadata = {
 
 const routeCards = [
   {
+    title: "Start here",
+    href: "/genesismesh/start-here",
+    text: "A short explainer for new visitors.",
+    icon: ShieldCheck,
+  },
+  {
     title: "SDKs",
     href: "/genesismesh/sdks",
     text: "Use Genesis Mesh from Go, TypeScript, and .NET.",
     icon: Code2,
+  },
+  {
+    title: "Docs",
+    href: "/genesismesh/docs",
+    text: "Read protocol notes, source docs, and implementation entry points.",
+    icon: BookOpen,
   },
   {
     title: "Videos",
@@ -59,11 +71,15 @@ export default function GenesisMeshPage() {
   const TrustIcon = developerProof[0].icon;
   const jsonLd = {
     "@context": "https://schema.org",
-    "@type": "SoftwareSourceCode",
+    "@type": ["SoftwareApplication", "SoftwareSourceCode"],
     name: "Genesis Mesh",
     description: seo.description,
+    applicationCategory: "DeveloperApplication",
+    operatingSystem: "Cross-platform",
     codeRepository: siteLinks.githubCore,
     url: siteLinks.genesisMesh,
+    sameAs: [siteLinks.githubCore, siteLinks.youtube, siteLinks.patreon],
+    downloadUrl: [siteLinks.sdkGo, siteLinks.sdkTypeScript, siteLinks.sdkDotnet],
     programmingLanguage: ["Python", "Go", "TypeScript", "C#"],
   };
 
@@ -96,15 +112,13 @@ export default function GenesisMeshPage() {
               protocol interoperability across independent operators.
             </p>
             <div className="mt-9 flex flex-col gap-3 sm:flex-row">
-              <a
-                href={siteLinks.genesisMesh}
-                target="_blank"
-                rel="noreferrer"
+              <Link
+                href="/genesismesh/docs"
                 className="inline-flex h-12 items-center justify-center gap-2 rounded-md bg-[#d9ff61] px-6 text-sm font-bold text-zinc-950 transition hover:bg-white"
               >
-                Open product site
-                <ArrowUpRight size={18} aria-hidden="true" />
-              </a>
+                Read docs
+                <ArrowRight size={18} aria-hidden="true" />
+              </Link>
               <a
                 href={siteLinks.githubCore}
                 target="_blank"

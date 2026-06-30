@@ -34,13 +34,28 @@ export const metadata: Metadata = {
 };
 
 export default function HomePage() {
-  const jsonLd = {
+  const jsonLd = [
+    {
     "@context": "https://schema.org",
     "@type": "Organization",
     name: "GenesisMesh Labs",
     url: siteLinks.githubOrg,
     sameAs: [siteLinks.githubOrg, siteLinks.youtube, siteLinks.patreon, siteLinks.genesisMesh],
-  };
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "WebSite",
+      name: "Connectorzzz Dev",
+      url: "https://dev.connectorzzz.com",
+      description:
+        "Developer resources, protocols, SDKs, videos, and articles for portable trust across independent operators.",
+      publisher: {
+        "@type": "Organization",
+        name: "GenesisMesh Labs",
+        url: siteLinks.githubOrg,
+      },
+    },
+  ];
 
   return (
     <PageShell>

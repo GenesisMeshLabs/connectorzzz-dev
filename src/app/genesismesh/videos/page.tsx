@@ -6,11 +6,33 @@ import { siteLinks } from "@/content/genesismesh";
 import { getYoutubeVideos } from "@/lib/content-feeds";
 
 export const metadata: Metadata = {
-  title: "Genesis Mesh Videos | Connectorzzz Dev",
+  title: "Genesis Mesh Videos",
   description:
     "Watch Genesis Mesh campaign videos about portable trust, sovereign systems, recognition, revocation, and protocol interoperability.",
   alternates: {
     canonical: "/genesismesh/videos",
+  },
+  openGraph: {
+    title: "Genesis Mesh Videos",
+    description:
+      "Campaign videos about portable trust, sovereign systems, recognition, revocation, and protocol interoperability.",
+    url: "/genesismesh/videos",
+    siteName: "Connectorzzz Dev",
+    images: [
+      {
+        url: "/images/marketing/social-card.png",
+        width: 1200,
+        height: 630,
+        alt: "Genesis Mesh videos",
+      },
+    ],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Genesis Mesh Videos",
+    description:
+      "Campaign videos about portable trust, sovereign systems, recognition, revocation, and protocol interoperability.",
+    images: ["/images/marketing/social-card.png"],
   },
 };
 
@@ -29,8 +51,8 @@ export default async function VideosPage() {
               Genesis Mesh videos
             </h1>
             <p className="mt-5 text-lg leading-8 text-zinc-300">
-              A live index of public videos from the GenesisMesh Labs YouTube channel.
-              New channel uploads appear here automatically when the feed refreshes.
+              Campaign videos on portable trust, sovereign systems, recognition,
+              revocation, and protocol interoperability.
             </p>
           </div>
           <a

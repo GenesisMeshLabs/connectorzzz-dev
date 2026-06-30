@@ -6,11 +6,33 @@ import { siteLinks } from "@/content/genesismesh";
 import { getPatreonArticles } from "@/lib/content-feeds";
 
 export const metadata: Metadata = {
-  title: "Genesis Mesh Articles | Connectorzzz Dev",
+  title: "Genesis Mesh Articles",
   description:
     "Genesis Mesh articles and long-form campaign writing on portable trust, sovereign systems, and verifiable trust state.",
   alternates: {
     canonical: "/genesismesh/articles",
+  },
+  openGraph: {
+    title: "Genesis Mesh Articles",
+    description:
+      "Long-form writing on portable trust, sovereign systems, recognition, revocation, and verifiable trust state.",
+    url: "/genesismesh/articles",
+    siteName: "Connectorzzz Dev",
+    images: [
+      {
+        url: "/images/marketing/social-card.png",
+        width: 1200,
+        height: 630,
+        alt: "Genesis Mesh articles",
+      },
+    ],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Genesis Mesh Articles",
+    description:
+      "Long-form writing on portable trust, sovereign systems, recognition, revocation, and verifiable trust state.",
+    images: ["/images/marketing/social-card.png"],
   },
 };
 
@@ -28,8 +50,8 @@ export default async function ArticlesPage() {
             Genesis Mesh articles
           </h1>
           <p className="mt-5 text-lg leading-8 text-zinc-300">
-            Long-form writing on portable trust, sovereign systems, recognition,
-            revocation, and verifiable trust state.
+            Long-form campaign articles and founder notes on portable trust,
+            sovereign systems, recognition, revocation, and verifiable trust state.
           </p>
         </div>
         <div className="mt-10 grid gap-5 md:grid-cols-3">
@@ -58,8 +80,8 @@ export default async function ArticlesPage() {
         <div className="mt-10 rounded-md border border-white/10 bg-white/[0.04] p-6">
           <p className="text-lg font-semibold text-white">Follow the full article stream</p>
           <p className="mt-2 max-w-2xl text-sm leading-6 text-zinc-400">
-            Patreon is the canonical publishing channel for articles and supporter updates.
-            This site indexes the important entries and points readers to the source.
+            Patreon is the home for long-form articles, supporter updates, and new
+            campaign writing as the Genesis Mesh story develops.
           </p>
           <a
             href={siteLinks.patreonPosts}
