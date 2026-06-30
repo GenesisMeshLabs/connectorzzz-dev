@@ -2,7 +2,8 @@ import type { Metadata } from "next";
 import Image from "next/image";
 import { ExternalLink, Play } from "lucide-react";
 import { PageShell } from "@/components/site-shell";
-import { siteLinks, videos } from "@/content/genesismesh";
+import { siteLinks } from "@/content/genesismesh";
+import { getYoutubeVideos } from "@/lib/content-feeds";
 
 export const metadata: Metadata = {
   title: "Genesis Mesh Videos | Connectorzzz Dev",
@@ -13,7 +14,9 @@ export const metadata: Metadata = {
   },
 };
 
-export default function VideosPage() {
+export default async function VideosPage() {
+  const videos = await getYoutubeVideos();
+
   return (
     <PageShell>
       <section className="mx-auto max-w-7xl px-4 py-16 sm:px-6 lg:px-8">
@@ -26,8 +29,8 @@ export default function VideosPage() {
               Genesis Mesh videos
             </h1>
             <p className="mt-5 text-lg leading-8 text-zinc-300">
-              A video library for the core campaigns and use cases. Each video links to
-              the GenesisMesh Labs YouTube channel.
+              A live index of public videos from the GenesisMesh Labs YouTube channel.
+              New channel uploads appear here automatically when the feed refreshes.
             </p>
           </div>
           <a

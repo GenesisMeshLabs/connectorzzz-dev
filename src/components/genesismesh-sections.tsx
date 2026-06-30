@@ -1,6 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import { ArrowRight, ArrowUpRight, GitBranch, Play } from "lucide-react";
+import { BrandIcon } from "@/components/brand-icons";
 import {
   articles,
   campaigns,
@@ -122,7 +123,7 @@ export function ChannelStrip() {
           >
             <div className="flex items-center justify-between gap-3">
               <div className="flex h-11 w-11 items-center justify-center rounded-md bg-white text-zinc-950 transition group-hover:bg-[#d9ff61]">
-                <channel.icon size={22} aria-hidden="true" />
+                <BrandIcon name={channel.icon} className="h-5 w-5" />
               </div>
               <ArrowUpRight className="text-zinc-500 transition group-hover:text-[#d9ff61]" size={18} />
             </div>

@@ -1,7 +1,9 @@
 import type { Metadata } from "next";
 import { ArrowUpRight } from "lucide-react";
+import { BrandIcon } from "@/components/brand-icons";
 import { PageShell } from "@/components/site-shell";
-import { articles, siteLinks } from "@/content/genesismesh";
+import { siteLinks } from "@/content/genesismesh";
+import { getPatreonArticles } from "@/lib/content-feeds";
 
 export const metadata: Metadata = {
   title: "Genesis Mesh Articles | Connectorzzz Dev",
@@ -12,7 +14,9 @@ export const metadata: Metadata = {
   },
 };
 
-export default function ArticlesPage() {
+export default async function ArticlesPage() {
+  const articles = await getPatreonArticles();
+
   return (
     <PageShell>
       <section className="mx-auto max-w-7xl px-4 py-16 sm:px-6 lg:px-8">
@@ -24,8 +28,8 @@ export default function ArticlesPage() {
             Genesis Mesh articles
           </h1>
           <p className="mt-5 text-lg leading-8 text-zinc-300">
-            Long-form positioning, technical arguments, and campaign writing live on
-            Patreon while this hub keeps the developer path organized.
+            Long-form writing on portable trust, sovereign systems, recognition,
+            revocation, and verifiable trust state.
           </p>
         </div>
         <div className="mt-10 grid gap-5 md:grid-cols-3">
@@ -39,7 +43,7 @@ export default function ArticlesPage() {
             >
               <div className="flex items-start justify-between gap-4">
                 <div className="flex h-12 w-12 items-center justify-center rounded-md bg-white text-zinc-950 transition group-hover:bg-[#d9ff61]">
-                  <article.icon size={24} aria-hidden="true" />
+                  <BrandIcon name="patreon" className="h-6 w-6" />
                 </div>
                 <ArrowUpRight className="text-zinc-500 transition group-hover:text-[#d9ff61]" size={18} />
               </div>

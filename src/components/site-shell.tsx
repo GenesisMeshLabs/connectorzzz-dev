@@ -1,16 +1,17 @@
 import Image from "next/image";
 import Link from "next/link";
 import { ArrowUpRight } from "lucide-react";
+import { BrandIcon } from "@/components/brand-icons";
 import { externalChannels, navItems, siteLinks } from "@/content/genesismesh";
 
 export function SiteHeader() {
   return (
     <header className="sticky top-0 z-50 border-b border-white/10 bg-[#070807]/90 backdrop-blur-xl">
       <div className="mx-auto flex h-16 max-w-7xl items-center justify-between px-4 sm:px-6 lg:px-8">
-        <Link href="/genesismesh" className="flex items-center gap-3">
+        <Link href="/" className="flex items-center gap-3">
           <Image
             src="/images/brand/logo-reverse.svg"
-            alt="Genesis Mesh"
+            alt="Connectorzzz Dev"
             width={34}
             height={34}
             priority
@@ -30,6 +31,7 @@ export function SiteHeader() {
           target="_blank"
           rel="noreferrer"
         >
+          <BrandIcon name="github" className="h-4 w-4" />
           GitHub
           <ArrowUpRight size={16} aria-hidden="true" />
         </a>
@@ -61,7 +63,7 @@ export function SiteFooter() {
               rel="noreferrer"
               className="flex items-center gap-2 rounded-md border border-white/10 bg-white/[0.03] px-3 py-2 text-sm text-zinc-300 transition hover:border-[#d9ff61]/60 hover:text-white"
             >
-              <channel.icon size={16} aria-hidden="true" />
+              <BrandIcon name={channel.icon} className="h-4 w-4" />
               {channel.name}
             </a>
           ))}
