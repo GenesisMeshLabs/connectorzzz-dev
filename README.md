@@ -5,7 +5,9 @@ Developer and product hub for Connectorzzz systems.
 The first product section is Genesis Mesh:
 
 ```text
+dev.connectorzzz.com/
 dev.connectorzzz.com/genesismesh
+dev.connectorzzz.com/genesismesh/sdks
 dev.connectorzzz.com/genesismesh/videos
 dev.connectorzzz.com/genesismesh/articles
 ```
@@ -30,16 +32,22 @@ npm.cmd run dev
 Default local URL:
 
 ```text
-http://localhost:3000/genesismesh
+http://localhost:3000/
 ```
 
 ## Content Model
 
-Genesis Mesh links, video IDs, article links, SDK cards, pillars, and campaign cards live in:
+Genesis Mesh links, fallback video IDs, fallback article links, SDK cards, pillars, and campaign cards live in:
 
 ```text
 src/content/genesismesh.ts
 ```
+
+Public content indexes are fetched server-side:
+
+- YouTube videos use the public GenesisMesh Labs channel feed.
+- Patreon articles are discovered from public GenesisMesh Labs post links.
+- Both pages fall back to curated local content if a public feed or page is unavailable.
 
 Shared UI sections live in:
 

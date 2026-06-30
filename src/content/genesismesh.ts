@@ -1,22 +1,16 @@
 import {
-  BookOpen,
   Boxes,
   Braces,
   Cable,
   CircleSlash,
   Code2,
-  FileText,
-  GitBranch,
-  Globe2,
   KeyRound,
   LockKeyhole,
   Network,
-  Play,
   RadioTower,
   ScrollText,
   ShieldCheck,
   TerminalSquare,
-  Video,
 } from "lucide-react";
 import type { LucideIcon } from "lucide-react";
 
@@ -39,17 +33,18 @@ export type NavItem = {
 };
 
 export const navItems: NavItem[] = [
+  { label: "Home", href: "/" },
   { label: "Genesis Mesh", href: "/genesismesh" },
+  { label: "SDKs", href: "/genesismesh/sdks" },
   { label: "Videos", href: "/genesismesh/videos" },
   { label: "Articles", href: "/genesismesh/articles" },
-  { label: "SDKs", href: "/genesismesh#sdks" },
 ];
 
 export type ExternalChannel = {
   name: string;
   href: string;
   description: string;
-  icon: LucideIcon;
+  icon: "github" | "youtube" | "patreon" | "product";
 };
 
 export const externalChannels: ExternalChannel[] = [
@@ -57,25 +52,25 @@ export const externalChannels: ExternalChannel[] = [
     name: "GitHub",
     href: siteLinks.githubOrg,
     description: "Source code, SDKs, releases, and open infrastructure.",
-    icon: GitBranch,
+    icon: "github",
   },
   {
     name: "YouTube",
     href: siteLinks.youtube,
     description: "Campaign videos and technical explainers.",
-    icon: Video,
+    icon: "youtube",
   },
   {
     name: "Patreon",
     href: siteLinks.patreon,
     description: "Articles, supporter updates, and public essays.",
-    icon: BookOpen,
+    icon: "patreon",
   },
   {
     name: "Product Site",
     href: siteLinks.genesisMesh,
     description: "Current Genesis Mesh public product surface.",
-    icon: Globe2,
+    icon: "product",
   },
 ];
 
@@ -264,28 +259,100 @@ export type Article = {
 
 export const articles: Article[] = [
   {
+    title: "Why Genesis Mesh?",
+    href: siteLinks.patreonPosts,
+    channel: "Patreon",
+    summary:
+      "Systems can connect, but they cannot carry trust across organizational boundaries.",
+    icon: ScrollText,
+  },
+  {
+    title: "Portable Trust",
+    href: siteLinks.patreonPosts,
+    channel: "Patreon",
+    summary:
+      "Trust should move between independent systems without one central owner.",
+    icon: ScrollText,
+  },
+  {
+    title: "Sovereign Systems",
+    href: siteLinks.patreonPosts,
+    channel: "Patreon",
+    summary:
+      "Each operator controls its own keys, policies, recognition, revocation, and trust decisions.",
+    icon: ScrollText,
+  },
+  {
+    title: "Recognition and Revocation",
+    href: siteLinks.patreonPosts,
+    channel: "Patreon",
+    summary:
+      "It is not enough to trust once. You must also be able to cut trust off with proof.",
+    icon: ScrollText,
+  },
+  {
+    title: "Auditable Trust State",
+    href: siteLinks.patreonPosts,
+    channel: "Patreon",
+    summary:
+      "Every trust decision should leave evidence that can be verified later.",
+    icon: ScrollText,
+  },
+  {
+    title: "Protocol Interoperability",
+    href: siteLinks.patreonPosts,
+    channel: "Patreon",
+    summary:
+      "Genesis Mesh is not tied to one runtime, one language, or one operator model.",
+    icon: ScrollText,
+  },
+  {
+    title: "Trust API and SDKs",
+    href: siteLinks.patreonPosts,
+    channel: "Patreon",
+    summary:
+      "Developers need a clear API and SDK path for consuming portable trust primitives.",
+    icon: ScrollText,
+  },
+  {
+    title: "Cross-Boundary Trust for AI Agents",
+    href: siteLinks.patreonPosts,
+    channel: "Patreon",
+    summary:
+      "Agent networks are one use case for identity, revocation, and verifiable trust state.",
+    icon: ScrollText,
+  },
+  {
+    title: "Portable Trust for Edge Infrastructure",
+    href: siteLinks.patreonPosts,
+    channel: "Patreon",
+    summary:
+      "Distributed devices, nodes, and operators need trust state that can survive the edge.",
+    icon: ScrollText,
+  },
+  {
+    title: "Securing Supply Chain Authorization",
+    href: siteLinks.patreonPosts,
+    channel: "Patreon",
+    summary:
+      "Supply-chain trust needs delegation, release gates, and revocation after compromise.",
+    icon: ScrollText,
+  },
+  {
+    title: "Integration Without Authority Transfer",
+    href: siteLinks.patreonPosts,
+    channel: "Patreon",
+    summary:
+      "Enterprise integration should not require one side to become the owner of the other's trust.",
+    icon: ScrollText,
+  },
+  {
     title: "Auditable Data Access Authorization",
     href: "https://www.patreon.com/GenesisMeshLabs/posts/auditable-data-162537779",
     channel: "Patreon",
     summary:
       "Data governance needs an enforcement layer that can prove access was authorized, scoped, and reviewable.",
     icon: ScrollText,
-  },
-  {
-    title: "Genesis Mesh Articles",
-    href: siteLinks.patreonPosts,
-    channel: "Patreon",
-    summary:
-      "Follow the campaign essays as they move from positioning into technical and operational articles.",
-    icon: FileText,
-  },
-  {
-    title: "Campaign Videos",
-    href: siteLinks.youtube,
-    channel: "YouTube",
-    summary:
-      "Watch the article arguments as narrated campaign videos for builders, operators, and security teams.",
-    icon: Play,
   },
 ];
 
