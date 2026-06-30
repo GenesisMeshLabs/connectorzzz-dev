@@ -67,28 +67,40 @@ export function HeroSection() {
           </div>
         </div>
         <div className="relative hidden lg:block">
-          <div className="overflow-hidden rounded-md border border-white/10 bg-white/[0.04] shadow-2xl shadow-black/40">
-            <Image
-              src="/images/marketing/marketing-hero-trust-fabric.png"
-              alt="Abstract trust fabric visualization"
-              width={1200}
-              height={900}
-              className="aspect-[4/3] object-cover"
-              priority
-            />
-          </div>
-          <div className="absolute -bottom-8 -left-8 grid w-80 gap-3 rounded-md border border-white/10 bg-[#10120f]/95 p-4 shadow-xl shadow-black/30">
-            {developerProof.map((item) => (
-              <div key={item.label} className="flex items-start gap-3">
-                <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-md bg-white text-zinc-950">
-                  <item.icon size={20} aria-hidden="true" />
+          <div className="rounded-md border border-white/10 bg-[#0d0f0c]/90 p-6 shadow-2xl shadow-black/40">
+            <div className="grid grid-cols-2 gap-3">
+              {campaigns.map((campaign) => (
+                <div
+                  key={campaign.title}
+                  className="rounded-md border border-white/10 bg-white/[0.04] p-4"
+                >
+                  <div className="flex h-11 w-11 items-center justify-center rounded-md bg-[#d9ff61] text-zinc-950">
+                    <campaign.icon size={21} aria-hidden="true" />
+                  </div>
+                  <p className="mt-5 text-sm font-semibold text-white">{campaign.title}</p>
+                  <p className="mt-2 text-sm leading-5 text-zinc-400">{campaign.message}</p>
                 </div>
-                <div>
-                  <p className="text-sm font-semibold text-white">{item.label}</p>
-                  <p className="text-sm leading-5 text-zinc-400">{item.value}</p>
-                </div>
+              ))}
+              <div className="rounded-md border border-[#d9ff61]/30 bg-[#d9ff61]/10 p-4">
+                <p className="text-sm font-semibold text-[#d9ff61]">Protocol surface</p>
+                <p className="mt-2 text-sm leading-5 text-zinc-300">
+                  Identity -&gt; recognition -&gt; revocation -&gt; audit.
+                </p>
               </div>
-            ))}
+            </div>
+            <div className="mt-4 grid gap-3 rounded-md border border-white/10 bg-[#10120f]/95 p-4 shadow-xl shadow-black/30">
+              {developerProof.map((item) => (
+                <div key={item.label} className="flex items-start gap-3">
+                  <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-md bg-white text-zinc-950">
+                    <item.icon size={20} aria-hidden="true" />
+                  </div>
+                  <div>
+                    <p className="text-sm font-semibold text-white">{item.label}</p>
+                    <p className="text-sm leading-5 text-zinc-400">{item.value}</p>
+                  </div>
+                </div>
+              ))}
+            </div>
           </div>
         </div>
       </div>

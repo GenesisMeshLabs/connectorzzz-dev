@@ -10,6 +10,9 @@ dev.connectorzzz.com/genesismesh/videos
 dev.connectorzzz.com/genesismesh/articles
 ```
 
+This repository is intended to be public. Do not commit local environment files,
+generated screenshots, deployment credentials, or private campaign drafts.
+
 ## Stack
 
 - Next.js App Router
