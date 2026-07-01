@@ -13,6 +13,7 @@ export const siteLinks = {
   genesisMesh: "https://genesismesh.connectorzzz.com/",
   githubOrg: "https://github.com/GenesisMeshLabs",
   githubCore: "https://github.com/GenesisMeshLabs/genesismesh",
+  githubCoreStargazers: "https://github.com/GenesisMeshLabs/genesismesh/stargazers",
   githubCoreDocs: "https://github.com/GenesisMeshLabs/genesismesh/tree/main/docs",
   sdkGo: "https://github.com/GenesisMeshLabs/sdk-go",
   sdkTypeScript: "https://github.com/GenesisMeshLabs/sdk-typescript",
