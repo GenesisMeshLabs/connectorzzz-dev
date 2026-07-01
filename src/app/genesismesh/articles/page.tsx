@@ -29,14 +29,11 @@ export default async function ArticlesPage() {
               href={article.href}
               target="_blank"
               rel="noreferrer"
-              className={[
-                "group relative flex min-h-72 overflow-hidden rounded-md border border-white/10 bg-[#0d0f0c] p-6 transition hover:border-[#d9ff61]/70",
-                index === 0 ? "md:col-span-2 xl:col-span-2" : "",
-              ].join(" ")}
+              className="group relative flex min-h-72 overflow-hidden rounded-md border border-white/10 bg-[#0d0f0c] p-6 transition hover:border-[#d9ff61]/70"
             >
               <div className="absolute inset-x-0 top-0 h-1 bg-[#d9ff61]/80" />
               <div className="pointer-events-none absolute -right-12 -top-12 h-36 w-36 rounded-full border border-[#d9ff61]/12 bg-white/[0.035] transition group-hover:bg-[#d9ff61]/8" />
-              <div className="absolute right-3 top-5 flex h-11 w-11 items-center justify-center rounded-md border border-white/15 bg-white/85 text-zinc-950 shadow-lg shadow-black/25 backdrop-blur-sm transition group-hover:bg-white">
+              <div className="absolute right-3 top-5 flex h-11 w-11 items-center justify-center rounded-md border border-[#d9ff61]/25 bg-[#d9ff61]/15 text-[#d9ff61] shadow-lg shadow-black/25 backdrop-blur-sm transition group-hover:bg-[#d9ff61]/25">
                 <BrandIcon name="patreon" className="h-5 w-5" />
               </div>
               <div className="relative flex w-full flex-col">
@@ -49,18 +46,12 @@ export default async function ArticlesPage() {
                   </p>
                 </div>
                 <h2
-                  className={[
-                    "mt-8 font-semibold text-white",
-                    index === 0 ? "max-w-3xl text-3xl sm:text-4xl" : "text-xl",
-                  ].join(" ")}
+                  className="mt-8 text-xl font-semibold text-white"
                 >
                   {article.title}
                 </h2>
                 <p
-                  className={[
-                    "mt-4 text-zinc-400",
-                    index === 0 ? "max-w-3xl text-base leading-7" : "text-sm leading-6",
-                  ].join(" ")}
+                  className="mt-4 text-sm leading-6 text-zinc-400"
                 >
                   {article.summary}
                 </p>

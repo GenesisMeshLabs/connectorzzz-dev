@@ -29,12 +29,13 @@ export const homeHubContent = {
     },
   },
   trustNodes: [
-    ["Operator A", "issues recognition"],
-    ["Operator B", "verifies evidence"],
+    ["Issuer", "signs recognition"],
+    ["Verifier", "checks evidence"],
     ["Trust API", "returns signed state"],
-    ["Audit trail", "retains proof"],
+    ["Audit log", "keeps proof"],
   ],
-  trustLabels: ["Sovereign identity", "Revocation with proof", "Auditable trust"],
+  trustLabels: ["Sovereign identity", "Revocation with proof", "Portable trust"],
+  trustStateLabel: "Trust state",
   sectionIntro: {
     eyebrow: "Start here",
     title: "One hub, separate paths.",
@@ -125,6 +126,32 @@ export const startHerePoints = [
   "Each operator keeps control of its own keys, recognition, revocation, and policies.",
   "SDKs and protocol docs make the same trust model usable from real systems.",
 ];
+
+export const startHereWorkflow = {
+  eyebrow: "How it works",
+  title: "Recognition, verification, and revocation become portable evidence.",
+  description:
+    "Genesis Mesh lets independent systems exchange trust state without handing authority to one central owner.",
+  steps: [
+    {
+      title: "Recognize",
+      description: "An operator signs a trust relationship or permission boundary.",
+    },
+    {
+      title: "Verify",
+      description: "Another system checks the signed evidence before trusting the request.",
+    },
+    {
+      title: "Revoke",
+      description: "Trust can be withdrawn later with proof that downstream systems can inspect.",
+    },
+  ],
+  protocolLines: [
+    ["recognize", "signed evidence"],
+    ["verify", "current trust state"],
+    ["revoke", "proof of withdrawal"],
+  ],
+};
 
 export const articlesFollowCta = {
   title: "Follow the article stream",

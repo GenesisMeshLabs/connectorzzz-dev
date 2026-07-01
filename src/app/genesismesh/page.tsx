@@ -108,18 +108,6 @@ export default function GenesisMeshPage() {
                 </div>
               </div>
 
-              <div className="grid gap-3 sm:grid-cols-3">
-                {developerProof.map((item) => (
-                  <div key={item.label} className="rounded-md border border-white/10 bg-white/[0.04] p-4">
-                    <div className="flex h-10 w-10 items-center justify-center rounded-md bg-white text-zinc-950">
-                      <item.icon size={20} aria-hidden="true" />
-                    </div>
-                    <p className="mt-4 text-sm font-semibold text-white">{item.label}</p>
-                    <p className="mt-2 text-xs leading-5 text-zinc-400">{item.value}</p>
-                  </div>
-                ))}
-              </div>
-
               <div className="rounded-md border border-white/10 bg-[#070807] p-4">
                 <div className="grid gap-3 sm:grid-cols-[1fr_auto_1fr_auto_1fr] sm:items-center">
                   {[

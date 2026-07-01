@@ -4,7 +4,7 @@ import { ArrowRight, CheckCircle2 } from "lucide-react";
 import { PageShell } from "@/components/site-shell";
 import { SectionIntro } from "@/components/ui";
 import { pageMetadata } from "@/content/metadata";
-import { pageIntros, startHerePoints } from "@/content/pages";
+import { pageIntros, startHerePoints, startHereWorkflow } from "@/content/pages";
 
 export const metadata: Metadata = pageMetadata({
   title: "Start Here: Genesis Mesh",
@@ -29,6 +29,34 @@ export default function StartHerePage() {
             </div>
           ))}
         </div>
+
+        <section className="mt-14 border-t border-white/10 pt-12">
+          <SectionIntro
+            eyebrow={startHereWorkflow.eyebrow}
+            title={startHereWorkflow.title}
+            description={startHereWorkflow.description}
+            className="max-w-4xl"
+          />
+          <div className="mt-10 grid gap-4 md:grid-cols-3">
+            {startHereWorkflow.steps.map((step, index) => (
+              <article key={step.title} className="soft-card p-5">
+                <p className="font-mono text-xs font-semibold uppercase tracking-[0.18em] text-[#d9ff61]">
+                  Step {index + 1}
+                </p>
+                <h2 className="mt-5 text-xl font-semibold text-white">{step.title}</h2>
+                <p className="mt-3 text-sm leading-6 text-zinc-400">{step.description}</p>
+              </article>
+            ))}
+          </div>
+          <div className="mt-5 rounded-md border border-white/10 bg-[#0d0f0c] p-5 font-mono text-sm leading-7 text-zinc-300">
+            {startHereWorkflow.protocolLines.map(([action, result]) => (
+              <div key={action} className="grid gap-2 sm:grid-cols-[8rem_1fr]">
+                <span className="text-[#d9ff61]">{action}</span>
+                <span>-&gt; {result}</span>
+              </div>
+            ))}
+          </div>
+        </section>
 
         <div className="mt-10 flex flex-col gap-3 sm:flex-row">
           <Link
