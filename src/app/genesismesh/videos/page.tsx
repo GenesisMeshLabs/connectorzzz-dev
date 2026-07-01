@@ -45,7 +45,7 @@ export default async function VideosPage() {
         <div className="flex flex-col justify-between gap-6 md:flex-row md:items-end">
           <div className="max-w-3xl">
             <p className="text-sm font-semibold uppercase tracking-[0.2em] text-[#d9ff61]">
-              YouTube
+              Videos
             </p>
             <h1 className="mt-4 text-4xl font-semibold text-white sm:text-5xl">
               Genesis Mesh videos
