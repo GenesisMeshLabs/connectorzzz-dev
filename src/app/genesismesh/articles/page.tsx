@@ -35,8 +35,8 @@ export default async function ArticlesPage() {
               ].join(" ")}
             >
               <div className="absolute inset-x-0 top-0 h-1 bg-[#d9ff61]/80" />
-              <div className="pointer-events-none absolute -right-8 -top-8 h-28 w-28 rounded-full border border-[#d9ff61]/15 bg-[#d9ff61]/8 transition group-hover:bg-[#d9ff61]/12" />
-              <div className="absolute right-5 top-5 flex h-10 w-10 items-center justify-center rounded-md border border-[#d9ff61]/30 bg-[#d9ff61] text-zinc-950 shadow-lg shadow-black/25 transition group-hover:bg-white">
+              <div className="pointer-events-none absolute -right-12 -top-12 h-36 w-36 rounded-full border border-[#d9ff61]/12 bg-white/[0.035] transition group-hover:bg-[#d9ff61]/8" />
+              <div className="absolute right-7 top-7 flex h-11 w-11 items-center justify-center rounded-md border border-white/15 bg-white/85 text-zinc-950 shadow-lg shadow-black/25 backdrop-blur-sm transition group-hover:bg-white">
                 <BrandIcon name="patreon" className="h-5 w-5" />
               </div>
               <div className="relative flex w-full flex-col">
