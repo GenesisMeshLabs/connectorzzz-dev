@@ -45,7 +45,7 @@ export default async function ArticlesPage() {
             >
               <div className="absolute inset-x-0 top-0 h-1 bg-[#d9ff61]/80" />
               <div className="pointer-events-none absolute -right-12 -top-12 h-36 w-36 rounded-full border border-[#d9ff61]/12 bg-white/[0.035] transition group-hover:bg-[#d9ff61]/8" />
-              <div className="absolute right-3 top-5 flex h-11 w-11 items-center justify-center rounded-md border border-[#d9ff61]/25 bg-[#d9ff61]/15 text-[#d9ff61] shadow-lg shadow-black/25 backdrop-blur-sm transition group-hover:bg-[#d9ff61]/25">
+              <div className="absolute right-3 top-5 flex h-11 w-11 items-center justify-center rounded-md border border-[#d9ff61]/40 bg-[#d9ff61]/20 text-[#d9ff61] shadow-lg shadow-black/25 backdrop-blur-sm transition group-hover:bg-[#d9ff61]/35">
                 <BrandIcon name="patreon" className="h-5 w-5" />
               </div>
               <div className="relative flex w-full flex-col">
