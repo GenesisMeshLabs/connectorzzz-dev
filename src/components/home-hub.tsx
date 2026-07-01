@@ -108,14 +108,12 @@ export function HomeHub() {
                 {homeHubContent.trustStateLabel}
               </span>
               {homeHubContent.trustLabels.map(
-                (label, index) => (
+                ({ label, className }) => (
                   <span
                     key={label}
                     className={[
                       "absolute rounded-md border border-white/10 bg-[#10120f]/90 px-3 py-2 text-xs font-semibold text-zinc-100 shadow-lg shadow-black/30",
-                      index === 0 ? "right-8 top-8" : "",
-                      index === 1 ? "bottom-24 right-0" : "",
-                      index === 2 ? "bottom-8 left-20" : "",
+                      className,
                     ].join(" ")}
                   >
                     {label}

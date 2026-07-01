@@ -48,13 +48,13 @@ export default function StartHerePage() {
               </article>
             ))}
           </div>
-          <div className="mt-5 rounded-md border border-white/10 bg-[#0d0f0c] p-5 font-mono text-sm leading-7 text-zinc-300">
-            {startHereWorkflow.protocolLines.map(([action, result]) => (
-              <div key={action} className="grid gap-2 sm:grid-cols-[8rem_1fr]">
-                <span className="text-[#d9ff61]">{action}</span>
-                <span>-&gt; {result}</span>
-              </div>
-            ))}
+          <div className="mt-5 rounded-md border border-white/10 bg-[#0d0f0c] p-5">
+            <p className="text-xs font-semibold uppercase tracking-[0.16em] text-[#d9ff61]">
+              Evidence shape
+            </p>
+            <pre className="mt-4 overflow-x-auto font-mono text-sm leading-7 text-zinc-300">
+              <code>{startHereWorkflow.evidenceExample.join("\n")}</code>
+            </pre>
           </div>
         </section>
 

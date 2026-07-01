@@ -52,13 +52,14 @@ export default function DocsPage() {
                 href={card.href}
                 target={external ? "_blank" : undefined}
                 rel={external ? "noreferrer" : undefined}
-                className="group link-card"
+                className="group relative overflow-hidden rounded-md border border-white/10 bg-[#0d0f0c] p-6 transition hover:border-[#d9ff61]/70"
               >
+                <div className="absolute inset-x-0 top-0 h-1 bg-[#d9ff61]/80" />
                 <div className="flex items-center justify-between">
-                  <div className="flex h-12 w-12 items-center justify-center rounded-md bg-white text-zinc-950 transition group-hover:bg-[#d9ff61]">
+                  <div className="flex h-12 w-12 items-center justify-center rounded-md border border-[#d9ff61]/25 bg-[#d9ff61]/15 text-[#d9ff61] transition group-hover:bg-[#d9ff61] group-hover:text-zinc-950">
                     <card.icon size={24} aria-hidden="true" />
                   </div>
-                  <ArrowUpRight className="text-zinc-500 transition group-hover:text-[#d9ff61]" size={18} />
+                  <ArrowUpRight className="text-[#d9ff61] transition group-hover:translate-x-0.5 group-hover:-translate-y-0.5" size={18} />
                 </div>
                 <h2 className="mt-6 text-xl font-semibold text-white">{card.title}</h2>
                 <p className="mt-3 text-sm leading-6 text-zinc-400">{card.description}</p>
