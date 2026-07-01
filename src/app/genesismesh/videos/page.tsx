@@ -89,8 +89,8 @@ export default async function VideosPage() {
                     sizes="(min-width: 1280px) 33vw, (min-width: 768px) 50vw, 100vw"
                   />
                   <div className="absolute inset-0 bg-black/20 transition group-hover:bg-black/10" />
-                  <div className="absolute left-4 top-4 flex h-12 w-12 items-center justify-center rounded-md bg-[#d9ff61] text-zinc-950">
-                    <Play size={22} fill="currentColor" aria-hidden="true" />
+                  <div className="absolute right-4 top-4 flex h-11 w-11 items-center justify-center rounded-md bg-[#d9ff61] text-zinc-950 shadow-lg shadow-black/30 transition group-hover:bg-white sm:h-12 sm:w-12">
+                    <Play size={21} fill="currentColor" aria-hidden="true" className="ml-0.5" />
                   </div>
                 </div>
                 <div className="p-5">
