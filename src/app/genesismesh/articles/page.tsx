@@ -35,20 +35,18 @@ export default async function ArticlesPage() {
               ].join(" ")}
             >
               <div className="absolute inset-x-0 top-0 h-1 bg-[#d9ff61]/80" />
-              <div className="pointer-events-none absolute -right-10 -top-10 h-32 w-32 rounded-full border border-[#d9ff61]/10 bg-[#d9ff61]/5 transition group-hover:bg-[#d9ff61]/10" />
+              <div className="pointer-events-none absolute -right-8 -top-8 h-28 w-28 rounded-full border border-[#d9ff61]/15 bg-[#d9ff61]/8 transition group-hover:bg-[#d9ff61]/12" />
+              <div className="absolute right-5 top-5 flex h-10 w-10 items-center justify-center rounded-md border border-[#d9ff61]/30 bg-[#d9ff61] text-zinc-950 shadow-lg shadow-black/25 transition group-hover:bg-white">
+                <BrandIcon name="patreon" className="h-5 w-5" />
+              </div>
               <div className="relative flex w-full flex-col">
-                <div className="flex items-start justify-between gap-4">
-                  <div>
-                    <p className="font-mono text-xs font-semibold uppercase tracking-[0.18em] text-[#d9ff61]">
-                      Article {String(index + 1).padStart(2, "0")}
-                    </p>
-                    <p className="mt-2 text-xs font-semibold uppercase tracking-[0.16em] text-zinc-500">
-                      {article.channel}
-                    </p>
-                  </div>
-                  <div className="flex h-10 w-10 items-center justify-center rounded-md bg-white text-zinc-950 transition group-hover:bg-[#d9ff61]">
-                    <BrandIcon name="patreon" className="h-5 w-5" />
-                  </div>
+                <div className="pr-12">
+                  <p className="font-mono text-xs font-semibold uppercase tracking-[0.18em] text-[#d9ff61]">
+                    Article {String(index + 1).padStart(2, "0")}
+                  </p>
+                  <p className="mt-2 text-xs font-semibold uppercase tracking-[0.16em] text-zinc-500">
+                    {article.channel}
+                  </p>
                 </div>
                 <h2
                   className={[
