@@ -36,8 +36,8 @@ export const homeHubContent = {
   ],
   trustLabels: [
     { label: "Sovereign identity", className: "right-12 top-10" },
-    { label: "Revocation with proof", className: "bottom-24 right-8" },
-    { label: "Cross-boundary trust", className: "bottom-10 left-1/2 -translate-x-1/2" },
+    { label: "Revocation with proof", className: "right-3 bottom-10" },
+    { label: "Portable trust", className: "bottom-10 left-1/2 -translate-x-1/2" },
   ],
   trustStateLabel: "Trust state",
   sectionIntro: {

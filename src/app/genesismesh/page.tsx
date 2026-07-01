@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
-import { ArrowRight, Star } from "lucide-react";
+import { ArrowRight } from "lucide-react";
 import { BrandIcon } from "@/components/brand-icons";
 import { PageShell } from "@/components/site-shell";
 import { ButtonLink, SectionIntro } from "@/components/ui";
@@ -48,7 +48,7 @@ export default function GenesisMeshPage() {
           sizes="100vw"
         />
         <div className="absolute inset-0 bg-[linear-gradient(90deg,#070807_0%,rgba(7,8,7,.94)_48%,rgba(7,8,7,.62)_100%)]" />
-        <div className="site-container relative grid items-center gap-10 py-16 lg:min-h-[680px] lg:grid-cols-[1fr_.95fr]">
+        <div className="site-container relative grid items-center gap-10 py-16 lg:min-h-[560px] lg:grid-cols-[1fr_.95fr]">
           <div className="max-w-3xl">
             <p className="inline-flex rounded-md border border-[#d9ff61]/25 bg-[#d9ff61]/10 px-3 py-2 text-sm font-semibold text-[#d9ff61]">
               {genesisMeshIntro.eyebrow}
@@ -70,14 +70,6 @@ export default function GenesisMeshPage() {
                 icon={<BrandIcon name="github" className="h-5 w-5" />}
               >
                 View source
-              </ButtonLink>
-              <ButtonLink
-                href={siteLinks.githubCoreStargazers}
-                external
-                variant="accent"
-                icon={<Star size={18} aria-hidden="true" />}
-              >
-                Star on GitHub
               </ButtonLink>
             </div>
           </div>

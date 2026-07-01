@@ -56,7 +56,7 @@ export default function DocsPage() {
               >
                 <div className="absolute inset-x-0 top-0 h-1 bg-[#d9ff61]/80" />
                 <div className="flex items-center justify-between">
-                  <div className="flex h-12 w-12 items-center justify-center rounded-md border border-[#d9ff61]/25 bg-[#d9ff61]/15 text-[#d9ff61] transition group-hover:bg-[#d9ff61] group-hover:text-zinc-950">
+                  <div className="flex h-12 w-12 items-center justify-center rounded-md border border-white/15 bg-white/10 text-white transition group-hover:bg-white group-hover:text-zinc-950">
                     <card.icon size={24} aria-hidden="true" />
                   </div>
                   <ArrowUpRight className="text-[#d9ff61] transition group-hover:translate-x-0.5 group-hover:-translate-y-0.5" size={18} />

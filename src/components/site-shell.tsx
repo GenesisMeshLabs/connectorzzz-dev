@@ -23,7 +23,7 @@ export function SiteHeader() {
         <div className="flex items-center gap-2">
           <a
             href={siteLinks.githubOrg}
-            className="hidden h-10 items-center gap-2 rounded-md bg-white px-4 text-sm font-semibold text-zinc-950 transition hover:bg-[#d9ff61] md:inline-flex"
+            className="hidden h-10 items-center gap-2 rounded-md border border-white/20 bg-white/[0.07] px-4 text-sm font-semibold text-white transition hover:border-white/40 hover:bg-white/15 md:inline-flex"
             target="_blank"
             rel="noreferrer"
           >
