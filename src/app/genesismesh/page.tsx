@@ -72,7 +72,7 @@ export default function GenesisMeshPage() {
                 View source
               </ButtonLink>
               <ButtonLink
-                href={siteLinks.githubCore}
+                href={siteLinks.githubCoreStargazers}
                 external
                 variant="accent"
                 icon={<Star size={18} aria-hidden="true" />}
@@ -126,15 +126,22 @@ export default function GenesisMeshPage() {
                     ["Operator", "keeps local authority"],
                     ["Signed treaty", "carries recognition"],
                     ["Verifier", "checks trust offline"],
-                  ].map(([title, text]) => (
-                    <div key={title} className="rounded-md bg-white/[0.04] p-4">
-                      <p className="text-sm font-semibold text-white">{title}</p>
-                      <p className="mt-1 text-xs leading-5 text-zinc-500">{text}</p>
-                      <div className="mt-4 h-1.5 w-16 rounded-full bg-[#d9ff61]" />
+                  ].map(([title, text], index) => (
+                    <div key={title} className="contents">
+                      <div className="rounded-md bg-white/[0.04] p-4">
+                        <p className="text-sm font-semibold text-white">{title}</p>
+                        <p className="mt-1 text-xs leading-5 text-zinc-500">{text}</p>
+                        <div className="mt-4 h-1.5 w-16 rounded-full bg-[#d9ff61]" />
+                      </div>
+                      {index < 2 ? (
+                        <ArrowRight
+                          className="hidden text-[#d9ff61] sm:block"
+                          size={18}
+                          aria-hidden="true"
+                        />
+                      ) : null}
                     </div>
                   ))}
-                  <ArrowRight className="hidden text-[#d9ff61] sm:block" size={18} aria-hidden="true" />
-                  <ArrowRight className="hidden text-[#d9ff61] sm:block" size={18} aria-hidden="true" />
                 </div>
               </div>
             </div>

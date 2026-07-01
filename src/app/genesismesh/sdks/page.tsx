@@ -33,7 +33,7 @@ export default function SdksPage() {
               <ArrowUpRight size={17} aria-hidden="true" />
             </a>
             <a
-              href={siteLinks.githubCore}
+              href={siteLinks.githubCoreStargazers}
               target="_blank"
               rel="noreferrer"
               className="inline-flex h-12 items-center justify-center gap-2 rounded-md border border-white/15 bg-white/10 px-5 text-sm font-bold text-white transition hover:border-[#d9ff61]/60 hover:bg-white/15"
