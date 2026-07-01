@@ -177,7 +177,7 @@ export default function GenesisMeshPage() {
                   <div className="flex h-12 w-12 items-center justify-center rounded-md bg-white text-zinc-950 transition group-hover:bg-[#d9ff61]">
                     <card.icon size={24} aria-hidden="true" />
                   </div>
-                  <ArrowRight className="text-zinc-500 transition group-hover:text-[#d9ff61]" size={18} />
+                  <ArrowRight className="text-[#d9ff61] transition group-hover:translate-x-0.5" size={18} />
                 </div>
                 <h3 className="mt-6 text-xl font-semibold text-white">{card.title}</h3>
                 <p className="mt-3 text-sm leading-6 text-zinc-400">{card.description}</p>
