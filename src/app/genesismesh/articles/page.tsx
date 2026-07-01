@@ -46,14 +46,8 @@ export default async function ArticlesPage() {
                       {article.channel}
                     </p>
                   </div>
-                  <div className="flex items-center gap-3">
-                    <div className="flex h-10 w-10 items-center justify-center rounded-md bg-white text-zinc-950 transition group-hover:bg-[#d9ff61]">
-                      <BrandIcon name="patreon" className="h-5 w-5" />
-                    </div>
-                    <ArrowUpRight
-                      className="text-[#d9ff61] transition group-hover:translate-x-0.5 group-hover:-translate-y-0.5"
-                      size={18}
-                    />
+                  <div className="flex h-10 w-10 items-center justify-center rounded-md bg-white text-zinc-950 transition group-hover:bg-[#d9ff61]">
+                    <BrandIcon name="patreon" className="h-5 w-5" />
                   </div>
                 </div>
                 <h2
