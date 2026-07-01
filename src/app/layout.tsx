@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
+import { siteConfig, siteLinks } from "@/content/site";
 import "./globals.css";
 
 const geistSans = Geist({
@@ -13,17 +14,16 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  metadataBase: new URL("https://dev.connectorzzz.com"),
+  metadataBase: new URL(siteConfig.url),
   title: {
-    default: "Connectorzzz Dev",
-    template: "%s | Connectorzzz Dev",
+    default: siteConfig.name,
+    template: `%s | ${siteConfig.name}`,
   },
-  description:
-    "Developer and product hub for Connectorzzz systems, starting with Genesis Mesh portable trust infrastructure.",
-  applicationName: "Connectorzzz Dev",
-  authors: [{ name: "GenesisMesh Labs", url: "https://github.com/GenesisMeshLabs" }],
-  creator: "GenesisMesh Labs",
-  publisher: "GenesisMesh Labs",
+  description: siteConfig.description,
+  applicationName: siteConfig.name,
+  authors: [{ name: siteConfig.organization, url: siteLinks.githubOrg }],
+  creator: siteConfig.organization,
+  publisher: siteConfig.organization,
   icons: {
     icon: "/favicon.ico",
     shortcut: "/favicon.ico",
@@ -41,26 +41,24 @@ export const metadata: Metadata = {
   ],
   openGraph: {
     type: "website",
-    siteName: "Connectorzzz Dev",
-    title: "Connectorzzz Dev",
-    description:
-      "Developer and product hub for Connectorzzz systems, starting with Genesis Mesh portable trust infrastructure.",
-    url: "https://dev.connectorzzz.com",
+    siteName: siteConfig.name,
+    title: siteConfig.name,
+    description: siteConfig.description,
+    url: siteConfig.url,
     images: [
       {
-        url: "/images/marketing/social-card.png",
+        url: siteConfig.socialCard,
         width: 1200,
         height: 630,
-        alt: "Connectorzzz Dev and Genesis Mesh portable trust infrastructure",
+        alt: siteConfig.socialCardAlt,
       },
     ],
   },
   twitter: {
     card: "summary_large_image",
-    title: "Connectorzzz Dev",
-    description:
-      "Developer and product hub for Connectorzzz systems, starting with Genesis Mesh portable trust infrastructure.",
-    images: ["/images/marketing/social-card.png"],
+    title: siteConfig.name,
+    description: siteConfig.description,
+    images: [siteConfig.socialCard],
   },
 };
 

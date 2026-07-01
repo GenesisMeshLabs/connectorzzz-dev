@@ -1,4 +1,5 @@
-import { articles, siteLinks, videos } from "@/content/genesismesh";
+import { articles, videos } from "@/content/genesismesh";
+import { siteLinks } from "@/content/site";
 
 export type FeedVideo = {
   title: string;

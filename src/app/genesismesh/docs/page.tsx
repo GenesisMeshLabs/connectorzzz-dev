@@ -1,37 +1,19 @@
 import type { Metadata } from "next";
 import { ArrowUpRight, BookOpen, Code2, GitBranch } from "lucide-react";
 import { PageShell } from "@/components/site-shell";
+import { SectionIntro } from "@/components/ui";
 import { siteLinks } from "@/content/genesismesh";
+import { pageMetadata } from "@/content/metadata";
+import { pageIntros } from "@/content/pages";
 
-export const metadata: Metadata = {
+export const metadata: Metadata = pageMetadata({
   title: "Genesis Mesh Docs",
   description:
     "Documentation entry points for Genesis Mesh protocol concepts, source code, SDKs, and implementation notes.",
-  alternates: {
-    canonical: "/genesismesh/docs",
-  },
-  openGraph: {
-    title: "Genesis Mesh Docs",
-    description:
-      "Documentation entry points for Genesis Mesh protocol concepts, source code, SDKs, and implementation notes.",
-    url: "/genesismesh/docs",
-    siteName: "Connectorzzz Dev",
-    images: [
-      {
-        url: "/images/marketing/social-card.png",
-        width: 1200,
-        height: 630,
-        alt: "Genesis Mesh documentation",
-      },
-    ],
-  },
-  twitter: {
-    card: "summary_large_image",
-    title: "Genesis Mesh Docs",
-    description: "Documentation entry points for Genesis Mesh protocol concepts and SDKs.",
-    images: ["/images/marketing/social-card.png"],
-  },
-};
+  path: "/genesismesh/docs",
+  imageAlt: "Genesis Mesh documentation",
+  twitterDescription: "Documentation entry points for Genesis Mesh protocol concepts and SDKs.",
+});
 
 const docsCards = [
   {
@@ -57,19 +39,8 @@ const docsCards = [
 export default function DocsPage() {
   return (
     <PageShell>
-      <section className="mx-auto max-w-7xl px-4 py-16 sm:px-6 lg:px-8">
-        <div className="max-w-3xl">
-          <p className="text-sm font-semibold uppercase tracking-[0.2em] text-[#d9ff61]">
-            Docs
-          </p>
-          <h1 className="mt-4 text-4xl font-semibold text-white sm:text-5xl">
-            Read the protocol and implementation notes.
-          </h1>
-          <p className="mt-5 text-lg leading-8 text-zinc-300">
-            Start with the repository documentation, then move into the core source and
-            SDKs when you are ready to integrate.
-          </p>
-        </div>
+      <section className="page-section">
+        <SectionIntro {...pageIntros.docs} />
 
         <div className="mt-12 grid gap-5 md:grid-cols-3">
           {docsCards.map((card) => {
@@ -81,7 +52,7 @@ export default function DocsPage() {
                 href={card.href}
                 target={external ? "_blank" : undefined}
                 rel={external ? "noreferrer" : undefined}
-                className="group rounded-md border border-white/10 bg-[#0d0f0c] p-6 transition hover:border-[#d9ff61]/70"
+                className="group link-card"
               >
                 <div className="flex items-center justify-between">
                   <div className="flex h-12 w-12 items-center justify-center rounded-md bg-white text-zinc-950 transition group-hover:bg-[#d9ff61]">

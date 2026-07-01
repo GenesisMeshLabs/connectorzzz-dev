@@ -1,37 +1,18 @@
 import type { Metadata } from "next";
 import { HomeHub } from "@/components/home-hub";
 import { PageShell } from "@/components/site-shell";
-import { siteLinks } from "@/content/genesismesh";
+import { pageMetadata } from "@/content/metadata";
+import { siteConfig, siteLinks } from "@/content/site";
 
-export const metadata: Metadata = {
-  title: "Connectorzzz Dev | Open Infrastructure for Sovereign Systems",
+export const metadata: Metadata = pageMetadata({
+  title: `${siteConfig.name} | Open Infrastructure for Sovereign Systems`,
   description:
     "Connectorzzz Dev is the developer hub for Genesis Mesh, SDKs, campaign videos, and articles about portable trust for sovereign systems.",
-  alternates: {
-    canonical: "/",
-  },
-  openGraph: {
-    title: "Connectorzzz Dev",
-    description:
-      "Developer resources, protocols, SDKs, videos, and articles for portable trust across independent operators.",
-    url: "/",
-    siteName: "Connectorzzz Dev",
-    images: [
-      {
-        url: "/images/marketing/social-card.png",
-        width: 1200,
-        height: 630,
-        alt: "Connectorzzz Dev and Genesis Mesh",
-      },
-    ],
-  },
-  twitter: {
-    card: "summary_large_image",
-    title: "Connectorzzz Dev",
-    description: "Open infrastructure for sovereign systems.",
-    images: ["/images/marketing/social-card.png"],
-  },
-};
+  path: "/",
+  imageAlt: "Connectorzzz Dev and Genesis Mesh",
+  twitterTitle: siteConfig.name,
+  twitterDescription: "Open infrastructure for sovereign systems.",
+});
 
 export default function HomePage() {
   const jsonLd = [
@@ -45,8 +26,8 @@ export default function HomePage() {
     {
       "@context": "https://schema.org",
       "@type": "WebSite",
-      name: "Connectorzzz Dev",
-      url: "https://dev.connectorzzz.com",
+      name: siteConfig.name,
+      url: siteConfig.url,
       description:
         "Developer resources, protocols, SDKs, videos, and articles for portable trust across independent operators.",
       publisher: {
