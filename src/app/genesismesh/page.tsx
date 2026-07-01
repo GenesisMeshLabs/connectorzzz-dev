@@ -166,7 +166,7 @@ export default function GenesisMeshPage() {
 
       <section className="border-t border-white/10 bg-white/[0.03]">
         <div className="mx-auto max-w-7xl px-4 py-16 sm:px-6 lg:px-8">
-          <div className="grid gap-4 md:grid-cols-3">
+          <div className="grid gap-4 md:grid-cols-2 xl:grid-cols-5">
             {genesisMeshRouteCards.map((card) => (
               <Link
                 key={card.href}
