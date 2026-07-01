@@ -5,6 +5,8 @@ import { PageShell } from "@/components/site-shell";
 import { siteLinks } from "@/content/genesismesh";
 import { getYoutubeVideos } from "@/lib/content-feeds";
 
+export const dynamic = "force-dynamic";
+
 export const metadata: Metadata = {
   title: "Genesis Mesh Videos",
   description:
@@ -79,9 +81,10 @@ export default async function VideosPage() {
               >
                 <div className="relative aspect-video">
                   <Image
-                    src={`https://i.ytimg.com/vi/${video.videoId}/hqdefault.jpg`}
+                    src={`${video.thumbnailUrl}${video.updated ? `?v=${encodeURIComponent(video.updated)}` : ""}`}
                     alt=""
                     fill
+                    unoptimized
                     className="object-cover"
                     sizes="(min-width: 1280px) 33vw, (min-width: 768px) 50vw, 100vw"
                   />
