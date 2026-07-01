@@ -27,10 +27,12 @@ body {
   background: var(--background);
   color: var(--foreground);
   font-family: var(--font-geist-sans), Arial, Helvetica, sans-serif;
+  overflow-x: hidden;
 }
 
 html {
   scroll-behavior: smooth;
+  overflow-x: hidden;
 }
 
 ::selection {
@@ -52,15 +54,15 @@ html {
   }
 
   .page-title {
-    @apply mt-4 text-4xl font-semibold text-white sm:text-5xl;
+    @apply mt-4 max-w-full hyphens-none text-4xl font-semibold text-white sm:text-5xl;
   }
 
   .section-title {
-    @apply mt-4 text-3xl font-semibold text-white sm:text-4xl;
+    @apply mt-4 max-w-full hyphens-none text-3xl font-semibold text-white sm:text-4xl;
   }
 
   .body-lead {
-    @apply mt-5 text-lg leading-8 text-zinc-300;
+    @apply mt-5 max-w-full text-lg leading-8 text-zinc-300;
   }
 
   .muted-copy {
@@ -68,15 +70,15 @@ html {
   }
 
   .surface-card {
-    @apply rounded-md border border-white/10 bg-[#0d0f0c];
+    @apply min-w-0 rounded-md border border-white/10 bg-[#0d0f0c];
   }
 
   .soft-card {
-    @apply rounded-md border border-white/10 bg-white/[0.04];
+    @apply min-w-0 rounded-md border border-white/10 bg-white/[0.04];
   }
 
   .link-card {
-    @apply rounded-md border border-white/10 bg-[#0d0f0c] p-6 transition hover:border-[#d9ff61]/70;
+    @apply min-w-0 rounded-md border border-white/10 bg-[#0d0f0c] p-6 transition hover:border-[#d9ff61]/70;
   }
 
   .icon-tile {
@@ -92,14 +94,14 @@ html {
   }
 
   .btn-primary {
-    @apply inline-flex h-12 items-center justify-center gap-2 rounded-md bg-[#d9ff61] px-6 text-sm font-bold text-zinc-950 transition hover:bg-white;
+    @apply inline-flex h-12 max-w-full items-center justify-center gap-2 rounded-md bg-[#d9ff61] px-6 text-center text-sm font-bold text-zinc-950 transition hover:bg-white;
   }
 
   .btn-secondary {
-    @apply inline-flex h-12 items-center justify-center gap-2 rounded-md border border-white/15 bg-white/10 px-6 text-sm font-bold text-white transition hover:border-white/40 hover:bg-white/15;
+    @apply inline-flex h-12 max-w-full items-center justify-center gap-2 rounded-md border border-white/15 bg-white/10 px-6 text-center text-sm font-bold text-white transition hover:border-white/40 hover:bg-white/15;
   }
 
   .btn-accent {
-    @apply inline-flex h-12 items-center justify-center gap-2 rounded-md border border-[#d9ff61]/30 bg-[#d9ff61]/10 px-6 text-sm font-bold text-[#d9ff61] transition hover:border-[#d9ff61]/70 hover:bg-[#d9ff61]/15;
+    @apply inline-flex h-12 max-w-full items-center justify-center gap-2 rounded-md border border-[#d9ff61]/30 bg-[#d9ff61]/10 px-6 text-center text-sm font-bold text-[#d9ff61] transition hover:border-[#d9ff61]/70 hover:bg-[#d9ff61]/15;
   }
 }

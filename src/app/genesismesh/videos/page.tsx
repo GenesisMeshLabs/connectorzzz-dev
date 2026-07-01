@@ -50,7 +50,7 @@ export default async function VideosPage() {
                 rel="noreferrer"
                 className="group block"
               >
-                <div className="relative aspect-video">
+                <div className="relative aspect-video overflow-hidden">
                   <Image
                     src={`${video.thumbnailUrl}${video.updated ? `?v=${encodeURIComponent(video.updated)}` : ""}`}
                     alt=""
@@ -60,7 +60,7 @@ export default async function VideosPage() {
                     sizes="(min-width: 1280px) 33vw, (min-width: 768px) 50vw, 100vw"
                   />
                   <div className="absolute inset-0 bg-black/20 transition group-hover:bg-black/10" />
-                  <div className="absolute right-4 top-4 flex h-11 w-11 items-center justify-center rounded-md bg-[#d9ff61] text-zinc-950 shadow-lg shadow-black/30 transition group-hover:bg-white sm:h-12 sm:w-12">
+                  <div className="absolute right-3 top-3 flex h-10 w-10 items-center justify-center rounded-md bg-[#d9ff61] text-zinc-950 shadow-lg shadow-black/30 transition group-hover:bg-white sm:right-4 sm:top-4 sm:h-12 sm:w-12">
                     <Play size={21} fill="currentColor" aria-hidden="true" className="ml-0.5" />
                   </div>
                 </div>

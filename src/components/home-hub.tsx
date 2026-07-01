@@ -58,12 +58,12 @@ export function HomeHub() {
           sizes="100vw"
         />
         <div className="absolute inset-0 bg-[radial-gradient(circle_at_72%_34%,rgba(217,255,97,.14),transparent_34%),linear-gradient(90deg,#070807_0%,rgba(7,8,7,.92)_45%,rgba(7,8,7,.72)_100%)]" />
-        <div className="site-container relative grid items-center gap-12 py-20 lg:min-h-[calc(100vh-4rem)] lg:grid-cols-[1fr_.92fr]">
+        <div className="site-container relative grid items-center gap-12 py-16 sm:py-20 lg:min-h-[720px] lg:grid-cols-[1fr_.92fr] lg:items-start lg:pt-28">
           <div className="max-w-3xl">
-            <p className="inline-flex rounded-md border border-[#d9ff61]/25 bg-[#d9ff61]/10 px-3 py-2 text-sm font-semibold text-[#d9ff61]">
+            <p className="inline-flex max-w-full rounded-md border border-[#d9ff61]/45 bg-[#d9ff61]/18 px-3 py-2 text-sm font-bold text-[#d9ff61] shadow-lg shadow-black/20">
               {homeHubContent.hero.eyebrow}
             </p>
-            <h1 className="mt-7 text-5xl font-semibold leading-[1.02] text-white sm:text-6xl lg:text-7xl">
+            <h1 className="mt-7 max-w-full hyphens-none text-5xl font-semibold leading-[1.02] text-white sm:text-6xl lg:text-7xl">
               {homeHubContent.hero.title}
             </h1>
             <p className="mt-6 max-w-2xl text-lg leading-8 text-zinc-300">
@@ -84,7 +84,7 @@ export function HomeHub() {
             </div>
           </div>
 
-          <div className="relative hidden lg:block">
+          <div className="relative hidden pt-2 lg:block">
             <div className="absolute -inset-8 rounded-full border border-[#d9ff61]/10" />
             <div className="relative rounded-md border border-white/10 bg-[#0d0f0c]/90 p-6 shadow-2xl shadow-black/40">
               <div className="grid min-h-[430px] grid-cols-2 gap-4">
@@ -92,7 +92,7 @@ export function HomeHub() {
                   <div
                     key={title}
                     className={[
-                      "rounded-md border border-white/10 bg-white/[0.04] p-5",
+                      "relative rounded-md border border-white/10 bg-white/[0.04] p-5",
                       index === 1 || index === 2 ? "translate-y-10" : "",
                     ].join(" ")}
                   >
@@ -112,7 +112,7 @@ export function HomeHub() {
                   <span
                     key={label}
                     className={[
-                      "absolute rounded-md border border-white/10 bg-[#10120f]/90 px-3 py-2 text-xs font-semibold text-zinc-100 shadow-lg shadow-black/30",
+                      "absolute rounded-md border border-white/10 bg-[#10120f]/95 px-3 py-2 text-xs font-semibold text-zinc-100 shadow-lg shadow-black/30",
                       className,
                     ].join(" ")}
                   >

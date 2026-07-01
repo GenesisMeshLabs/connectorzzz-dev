@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { ArrowUpRight, Code2 } from "lucide-react";
+import { ArrowUpRight, CheckCircle2, Code2 } from "lucide-react";
 import { BrandIcon } from "@/components/brand-icons";
 import { PageShell } from "@/components/site-shell";
 import { SectionIntro } from "@/components/ui";
@@ -61,16 +61,28 @@ export default function SdksPage() {
           ))}
         </div>
 
-        <div className="soft-card mt-10 p-6">
-          <div className="flex h-12 w-12 items-center justify-center rounded-md bg-[#d9ff61] text-zinc-950">
-            <Code2 size={24} aria-hidden="true" />
+        <div className="soft-card mt-10 grid gap-6 p-6 lg:grid-cols-[.75fr_1fr] lg:items-center">
+          <div>
+            <div className="flex h-12 w-12 items-center justify-center rounded-md bg-[#d9ff61] text-zinc-950">
+              <Code2 size={24} aria-hidden="true" />
+            </div>
+            <h2 className="mt-5 text-xl font-semibold text-white">
+              Protocol first, SDK assisted.
+            </h2>
+            <p className="muted-copy mt-3">
+              Each SDK is an entry point into the same trust API and evidence model.
+            </p>
           </div>
-          <h2 className="mt-5 text-xl font-semibold text-white">Protocol first, SDK assisted.</h2>
-          <p className="muted-copy mt-3 max-w-3xl">
-            The SDKs are entry points into the same trust API and evidence model. They should
-            stay aligned with conformance, recognition, revocation, and audit semantics across
-            languages.
-          </p>
+          <div className="grid gap-3 sm:grid-cols-3">
+            {["Conformance stays shared", "Recognition stays portable", "Revocation stays verifiable"].map(
+              (item) => (
+                <div key={item} className="rounded-md border border-white/10 bg-[#070807] p-4">
+                  <CheckCircle2 className="text-[#d9ff61]" size={18} aria-hidden="true" />
+                  <p className="mt-3 text-sm font-semibold leading-6 text-zinc-200">{item}</p>
+                </div>
+              ),
+            )}
+          </div>
         </div>
       </section>
     </PageShell>
