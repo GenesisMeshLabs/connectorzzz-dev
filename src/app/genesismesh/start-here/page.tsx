@@ -23,9 +23,9 @@ export default function StartHerePage() {
 
         <div className="mt-10 grid gap-4">
           {startHerePoints.map((point) => (
-            <div key={point} className="surface-card flex gap-4 p-5">
+            <div key={point} className="surface-card flex min-w-0 gap-4 p-5">
               <CheckCircle2 className="mt-1 shrink-0 text-[#d9ff61]" size={22} aria-hidden="true" />
-              <p className="text-base leading-7 text-zinc-200">{point}</p>
+              <p className="min-w-0 text-base leading-7 text-zinc-200">{point}</p>
             </div>
           ))}
         </div>

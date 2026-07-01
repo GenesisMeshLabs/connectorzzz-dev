@@ -35,9 +35,9 @@ export const homeHubContent = {
     ["Audit log", "keeps proof"],
   ],
   trustLabels: [
-    { label: "Sovereign identity", className: "right-12 top-10" },
-    { label: "Revocation with proof", className: "right-3 bottom-10" },
-    { label: "Portable trust", className: "bottom-10 left-1/2 -translate-x-1/2" },
+    { label: "Sovereign identity", className: "right-8 top-14" },
+    { label: "Revocation with proof", className: "right-6 bottom-16" },
+    { label: "Portable trust", className: "bottom-14 left-1/2 -translate-x-1/2" },
   ],
   trustStateLabel: "Trust state",
   sectionIntro: {
