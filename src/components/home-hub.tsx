@@ -103,7 +103,10 @@ export function HomeHub() {
                 ))}
               </div>
               <div className="absolute left-1/2 top-1/2 h-28 w-28 -translate-x-1/2 -translate-y-1/2 rounded-full border border-[#d9ff61]/30 bg-[#d9ff61]/10" />
-              <div className="absolute left-1/2 top-1/2 h-10 w-10 -translate-x-1/2 -translate-y-1/2 rounded-md bg-[#d9ff61]" />
+              <div className="absolute left-1/2 top-1/2 h-12 w-12 -translate-x-1/2 -translate-y-1/2 rounded-md bg-[#d9ff61] shadow-lg shadow-black/30" />
+              <span className="absolute left-1/2 top-[calc(50%+2.25rem)] -translate-x-1/2 rounded-md border border-[#d9ff61]/30 bg-[#10120f]/95 px-3 py-1.5 text-xs font-semibold text-[#d9ff61] shadow-lg shadow-black/30">
+                {homeHubContent.trustStateLabel}
+              </span>
               {homeHubContent.trustLabels.map(
                 (label, index) => (
                   <span
