@@ -4,7 +4,7 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { ArrowUpRight, Menu } from "lucide-react";
 import { BrandIcon } from "@/components/brand-icons";
-import { navItems, siteLinks } from "@/content/genesismesh";
+import { navItems, siteLinks } from "@/content/site";
 
 function isActivePath(pathname: string, href: string) {
   if (href === "/") {

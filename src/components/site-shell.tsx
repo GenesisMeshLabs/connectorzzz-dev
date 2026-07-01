@@ -3,12 +3,12 @@ import Link from "next/link";
 import { ArrowUpRight } from "lucide-react";
 import { BrandIcon } from "@/components/brand-icons";
 import { DesktopNav, MobileNav } from "@/components/site-navigation";
-import { externalChannels, siteLinks } from "@/content/genesismesh";
+import { externalChannels, siteLinks } from "@/content/site";
 
 export function SiteHeader() {
   return (
-    <header className="sticky top-0 z-50 border-b border-white/10 bg-[#070807]/90 backdrop-blur-xl">
-      <div className="mx-auto flex h-16 max-w-7xl items-center justify-between px-4 sm:px-6 lg:px-8">
+    <header className="sticky top-0 z-50 border-b border-white/10 bg-[var(--background)]/90 backdrop-blur-xl">
+      <div className="site-container flex h-16 items-center justify-between">
         <Link href="/" className="flex items-center gap-3">
           <Image
             src="/images/brand/logo-reverse.svg"
@@ -40,8 +40,8 @@ export function SiteHeader() {
 
 export function SiteFooter() {
   return (
-    <footer className="border-t border-white/10 bg-[#070807]">
-      <div className="mx-auto grid max-w-7xl gap-8 px-4 py-10 sm:px-6 md:grid-cols-[1.5fr_1fr] lg:px-8">
+    <footer className="border-t border-white/10 bg-[var(--background)]">
+      <div className="site-container grid gap-8 py-10 md:grid-cols-[1.5fr_1fr]">
         <div>
           <div className="flex items-center gap-3">
             <Image src="/images/brand/logo-reverse.svg" alt="" width={32} height={32} />
@@ -73,7 +73,7 @@ export function SiteFooter() {
 
 export function PageShell({ children }: { children: React.ReactNode }) {
   return (
-    <div className="min-h-screen bg-[#070807] text-white">
+    <div className="min-h-screen bg-[var(--background)] text-white">
       <SiteHeader />
       <main>{children}</main>
       <SiteFooter />

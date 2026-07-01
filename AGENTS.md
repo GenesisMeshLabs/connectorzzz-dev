@@ -4,9 +4,15 @@ This repository is the `dev.connectorzzz.com` developer/product hub.
 
 Keep the site modular:
 
-- Put reusable content data in `src/content`.
-- Put shared visual sections in `src/components`.
-- Keep route files small and focused on composition and metadata.
+- Put reusable content and platform links in `src/content`.
+- Keep site-wide URLs, navigation, channels, and sitemap routes in `src/content/site.ts`.
+- Keep page copy, route cards, CTAs, and page intro data in `src/content/pages.ts`.
+- Keep Genesis Mesh domain data in `src/content/genesismesh.ts`.
+- Put shared visual sections and UI primitives in `src/components`.
+- Prefer shared classes from `src/app/globals.css` (`site-container`, `page-section`, `link-card`, `btn-*`, etc.) before adding one-off Tailwind strings.
+- Keep route files small and focused on composition, data loading, and metadata.
+- Use `src/content/metadata.ts` for ordinary page metadata instead of repeating Open Graph/Twitter objects.
 - Keep Genesis Mesh framed as portable trust for sovereign systems, not as only an AI-agent framework.
 - Prefer real product/source links over invented claims.
+- Verify responsive UI after visual changes. Use temporary screenshots for desktop and mobile, review them, then delete them before committing.
 - Run `npm.cmd run lint` and `npm.cmd run build` before publishing.

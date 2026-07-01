@@ -2,56 +2,25 @@ import type { Metadata } from "next";
 import { ArrowUpRight, Code2, Star } from "lucide-react";
 import { BrandIcon } from "@/components/brand-icons";
 import { PageShell } from "@/components/site-shell";
+import { SectionIntro } from "@/components/ui";
 import { sdkCards, siteLinks } from "@/content/genesismesh";
+import { pageMetadata } from "@/content/metadata";
+import { pageIntros } from "@/content/pages";
 
-export const metadata: Metadata = {
+export const metadata: Metadata = pageMetadata({
   title: "Genesis Mesh SDKs",
   description:
     "Genesis Mesh SDKs for Go, TypeScript, and .NET developers integrating portable trust into real systems.",
-  alternates: {
-    canonical: "/genesismesh/sdks",
-  },
-  openGraph: {
-    title: "Genesis Mesh SDKs",
-    description:
-      "Go, TypeScript, and .NET SDKs for integrating Genesis Mesh portable trust into real systems.",
-    url: "/genesismesh/sdks",
-    siteName: "Connectorzzz Dev",
-    images: [
-      {
-        url: "/images/marketing/social-card.png",
-        width: 1200,
-        height: 630,
-        alt: "Genesis Mesh SDKs",
-      },
-    ],
-  },
-  twitter: {
-    card: "summary_large_image",
-    title: "Genesis Mesh SDKs",
-    description:
-      "Go, TypeScript, and .NET SDKs for integrating Genesis Mesh portable trust into real systems.",
-    images: ["/images/marketing/social-card.png"],
-  },
-};
+  path: "/genesismesh/sdks",
+  imageAlt: "Genesis Mesh SDKs",
+});
 
 export default function SdksPage() {
   return (
     <PageShell>
-      <section className="mx-auto max-w-7xl px-4 py-16 sm:px-6 lg:px-8">
+      <section className="page-section">
         <div className="flex flex-col justify-between gap-6 md:flex-row md:items-end">
-          <div className="max-w-3xl">
-            <p className="text-sm font-semibold uppercase tracking-[0.2em] text-[#d9ff61]">
-              SDKs
-            </p>
-            <h1 className="mt-4 text-4xl font-semibold text-white sm:text-5xl">
-              Build against the trust layer.
-            </h1>
-            <p className="mt-5 text-lg leading-8 text-zinc-300">
-              Genesis Mesh SDKs keep the protocol accessible from the languages teams
-              already use for services, tools, infrastructure, and enterprise systems.
-            </p>
-          </div>
+          <SectionIntro {...pageIntros.sdk} />
           <div className="flex flex-col gap-3 sm:flex-row md:flex-col lg:flex-row">
             <a
               href={siteLinks.githubOrg}
@@ -82,7 +51,7 @@ export default function SdksPage() {
               href={sdk.href}
               target="_blank"
               rel="noreferrer"
-              className="group rounded-md border border-white/10 bg-[#0d0f0c] p-6 transition hover:border-[#d9ff61]/70"
+              className="group link-card"
             >
               <div className="flex items-center justify-between">
                 <div className="flex h-14 w-14 items-center justify-center rounded-md bg-white text-zinc-950 transition group-hover:bg-[#d9ff61]">
@@ -103,12 +72,12 @@ export default function SdksPage() {
           ))}
         </div>
 
-        <div className="mt-10 rounded-md border border-white/10 bg-white/[0.04] p-6">
+        <div className="soft-card mt-10 p-6">
           <div className="flex h-12 w-12 items-center justify-center rounded-md bg-[#d9ff61] text-zinc-950">
             <Code2 size={24} aria-hidden="true" />
           </div>
           <h2 className="mt-5 text-xl font-semibold text-white">Protocol first, SDK assisted.</h2>
-          <p className="mt-3 max-w-3xl text-sm leading-6 text-zinc-400">
+          <p className="muted-copy mt-3 max-w-3xl">
             The SDKs are entry points into the same trust API and evidence model. They should
             stay aligned with conformance, recognition, revocation, and audit semantics across
             languages.
