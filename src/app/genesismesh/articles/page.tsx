@@ -44,7 +44,7 @@ export default async function ArticlesPage() {
       <section className="mx-auto max-w-7xl px-4 py-16 sm:px-6 lg:px-8">
         <div className="max-w-3xl">
           <p className="text-sm font-semibold uppercase tracking-[0.2em] text-[#d9ff61]">
-            Patreon
+            Articles
           </p>
           <h1 className="mt-4 text-4xl font-semibold text-white sm:text-5xl">
             Genesis Mesh articles
@@ -78,10 +78,10 @@ export default async function ArticlesPage() {
           ))}
         </div>
         <div className="mt-10 rounded-md border border-white/10 bg-white/[0.04] p-6">
-          <p className="text-lg font-semibold text-white">Follow the full article stream</p>
+          <p className="text-lg font-semibold text-white">Follow the article stream</p>
           <p className="mt-2 max-w-2xl text-sm leading-6 text-zinc-400">
-            Patreon is the home for long-form articles, supporter updates, and new
-            campaign writing as the Genesis Mesh story develops.
+            Read new campaign writing, founder notes, and supporter updates as the
+            Genesis Mesh story develops.
           </p>
           <a
             href={siteLinks.patreonPosts}
