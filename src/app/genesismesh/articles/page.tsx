@@ -89,7 +89,8 @@ export default async function ArticlesPage() {
             rel="noreferrer"
             className="mt-5 inline-flex h-11 items-center justify-center gap-2 rounded-md bg-[#d9ff61] px-5 text-sm font-bold text-zinc-950 transition hover:bg-white"
           >
-            Open Patreon posts
+            <BrandIcon name="patreon" className="h-5 w-5" />
+            Support on Patreon
             <ArrowUpRight size={17} aria-hidden="true" />
           </a>
         </div>
