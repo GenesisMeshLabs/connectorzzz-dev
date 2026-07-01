@@ -34,7 +34,11 @@ export const homeHubContent = {
     ["Trust API", "returns signed state"],
     ["Audit log", "keeps proof"],
   ],
-  trustLabels: ["Sovereign identity", "Revocation with proof", "Portable trust"],
+  trustLabels: [
+    { label: "Sovereign identity", className: "right-12 top-10" },
+    { label: "Revocation with proof", className: "bottom-24 right-8" },
+    { label: "Cross-boundary trust", className: "bottom-10 left-1/2 -translate-x-1/2" },
+  ],
   trustStateLabel: "Trust state",
   sectionIntro: {
     eyebrow: "Start here",
@@ -146,10 +150,13 @@ export const startHereWorkflow = {
       description: "Trust can be withdrawn later with proof that downstream systems can inspect.",
     },
   ],
-  protocolLines: [
-    ["recognize", "signed evidence"],
-    ["verify", "current trust state"],
-    ["revoke", "proof of withdrawal"],
+  evidenceExample: [
+    "{",
+    '  "subject": "operator-b",',
+    '  "state": "recognized",',
+    '  "evidence": "signed",',
+    '  "revocable": true',
+    "}",
   ],
 };
 

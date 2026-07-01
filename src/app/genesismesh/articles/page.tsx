@@ -21,8 +21,20 @@ export default async function ArticlesPage() {
   return (
     <PageShell>
       <section className="page-section">
-        <SectionIntro {...pageIntros.articles} />
-        <div className="mt-10 grid gap-5 md:grid-cols-2 xl:grid-cols-3">
+        <div className="flex flex-col justify-between gap-6 md:flex-row md:items-end">
+          <SectionIntro {...pageIntros.articles} />
+          <a
+            href={articlesFollowCta.href}
+            target="_blank"
+            rel="noreferrer"
+            className="inline-flex h-12 items-center justify-center gap-2 rounded-md bg-[#d9ff61] px-5 text-sm font-bold text-zinc-950 transition hover:bg-white"
+          >
+            <BrandIcon name="patreon" className="h-5 w-5" />
+            {articlesFollowCta.label}
+            <ArrowUpRight size={17} aria-hidden="true" />
+          </a>
+        </div>
+        <div className="mt-12 grid gap-5 md:grid-cols-2 xl:grid-cols-3">
           {articles.map((article, index) => (
             <a
               key={article.href}
@@ -62,20 +74,6 @@ export default async function ArticlesPage() {
               </div>
             </a>
           ))}
-        </div>
-        <div className="soft-card mt-10 p-6">
-          <p className="text-lg font-semibold text-white">{articlesFollowCta.title}</p>
-          <p className="muted-copy mt-2 max-w-2xl">{articlesFollowCta.description}</p>
-          <a
-            href={articlesFollowCta.href}
-            target="_blank"
-            rel="noreferrer"
-            className="mt-5 inline-flex h-11 items-center justify-center gap-2 rounded-md bg-[#d9ff61] px-5 text-sm font-bold text-zinc-950 transition hover:bg-white"
-          >
-            <BrandIcon name="patreon" className="h-5 w-5" />
-            {articlesFollowCta.label}
-            <ArrowUpRight size={17} aria-hidden="true" />
-          </a>
         </div>
       </section>
     </PageShell>
