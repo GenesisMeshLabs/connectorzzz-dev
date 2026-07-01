@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
-import { ArrowRight, BookOpen, Code2, FileText, Play, ShieldCheck } from "lucide-react";
+import { ArrowRight, BookOpen, Code2, FileText, Play, ShieldCheck, Star } from "lucide-react";
 import { BrandIcon } from "@/components/brand-icons";
 import { PageShell } from "@/components/site-shell";
 import { developerProof, pillars, seo, siteLinks } from "@/content/genesismesh";
@@ -127,6 +127,15 @@ export default function GenesisMeshPage() {
               >
                 <BrandIcon name="github" className="h-5 w-5" />
                 View source
+              </a>
+              <a
+                href={siteLinks.githubCore}
+                target="_blank"
+                rel="noreferrer"
+                className="inline-flex h-12 items-center justify-center gap-2 rounded-md border border-[#d9ff61]/30 bg-[#d9ff61]/10 px-6 text-sm font-bold text-[#d9ff61] transition hover:border-[#d9ff61]/70 hover:bg-[#d9ff61]/15"
+              >
+                <Star size={18} aria-hidden="true" />
+                Star on GitHub
               </a>
             </div>
           </div>

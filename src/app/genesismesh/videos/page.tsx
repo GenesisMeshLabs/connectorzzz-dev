@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import Image from "next/image";
 import { ExternalLink, Play } from "lucide-react";
+import { BrandIcon } from "@/components/brand-icons";
 import { PageShell } from "@/components/site-shell";
 import { siteLinks } from "@/content/genesismesh";
 import { getYoutubeVideos } from "@/lib/content-feeds";
@@ -63,7 +64,8 @@ export default async function VideosPage() {
             rel="noreferrer"
             className="inline-flex h-12 items-center justify-center gap-2 rounded-md bg-[#d9ff61] px-5 text-sm font-bold text-zinc-950 transition hover:bg-white"
           >
-            Open channel
+            <BrandIcon name="youtube" className="h-5 w-5" />
+            Subscribe on YouTube
             <ExternalLink size={17} aria-hidden="true" />
           </a>
         </div>

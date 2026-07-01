@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
-import { ArrowUpRight, Code2 } from "lucide-react";
+import { ArrowUpRight, Code2, Star } from "lucide-react";
+import { BrandIcon } from "@/components/brand-icons";
 import { PageShell } from "@/components/site-shell";
 import { sdkCards, siteLinks } from "@/content/genesismesh";
 
@@ -51,15 +52,27 @@ export default function SdksPage() {
               already use for services, tools, infrastructure, and enterprise systems.
             </p>
           </div>
-          <a
-            href={siteLinks.githubOrg}
-            target="_blank"
-            rel="noreferrer"
-            className="inline-flex h-12 items-center justify-center gap-2 rounded-md bg-[#d9ff61] px-5 text-sm font-bold text-zinc-950 transition hover:bg-white"
-          >
-            Open repositories
-            <ArrowUpRight size={17} aria-hidden="true" />
-          </a>
+          <div className="flex flex-col gap-3 sm:flex-row md:flex-col lg:flex-row">
+            <a
+              href={siteLinks.githubOrg}
+              target="_blank"
+              rel="noreferrer"
+              className="inline-flex h-12 items-center justify-center gap-2 rounded-md bg-[#d9ff61] px-5 text-sm font-bold text-zinc-950 transition hover:bg-white"
+            >
+              <BrandIcon name="github" className="h-5 w-5" />
+              Open repositories
+              <ArrowUpRight size={17} aria-hidden="true" />
+            </a>
+            <a
+              href={siteLinks.githubCore}
+              target="_blank"
+              rel="noreferrer"
+              className="inline-flex h-12 items-center justify-center gap-2 rounded-md border border-white/15 bg-white/10 px-5 text-sm font-bold text-white transition hover:border-[#d9ff61]/60 hover:bg-white/15"
+            >
+              <Star size={17} aria-hidden="true" />
+              Star on GitHub
+            </a>
+          </div>
         </div>
 
         <div className="mt-12 grid gap-5 md:grid-cols-3">
