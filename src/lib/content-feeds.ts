@@ -4,7 +4,9 @@ export type FeedVideo = {
   title: string;
   videoId: string;
   published: string;
+  updated: string;
   summary: string;
+  thumbnailUrl: string;
 };
 
 export type FeedArticle = {
@@ -16,6 +18,12 @@ export type FeedArticle = {
 
 const youtubeFeedUrl =
   "https://www.youtube.com/feeds/videos.xml?channel_id=UCXwK8VWAwnlI_0zmXcuywYA";
+
+const fallbackVideos: FeedVideo[] = videos.map((video) => ({
+  ...video,
+  updated: video.published,
+  thumbnailUrl: `https://i.ytimg.com/vi/${video.videoId}/hqdefault.jpg`,
+}));
 
 function decodeEntities(value: string) {
   return value
@@ -47,15 +55,25 @@ function matchTag(block: string, tag: string) {
   return match ? stripTags(match[1]) : "";
 }
 
+function matchAttribute(block: string, tag: string, attribute: string) {
+  const tagMatch = block.match(new RegExp(`<${tag}[^>]*>`, "i"));
+  if (!tagMatch) {
+    return "";
+  }
+
+  const attributeMatch = tagMatch[0].match(new RegExp(`${attribute}="([^"]+)"`, "i"));
+  return attributeMatch ? decodeEntities(attributeMatch[1]) : "";
+}
+
 export async function getYoutubeVideos(): Promise<FeedVideo[]> {
   try {
     const response = await fetch(youtubeFeedUrl, {
-      next: { revalidate: 3600 },
+      cache: "no-store",
       headers: { Accept: "application/atom+xml, application/xml;q=0.9, */*;q=0.8" },
     });
 
     if (!response.ok) {
-      return videos;
+      return fallbackVideos;
     }
 
     const xml = await response.text();
@@ -66,6 +84,10 @@ export async function getYoutubeVideos(): Promise<FeedVideo[]> {
         const videoId = matchTag(block, "yt:videoId");
         const title = matchTag(block, "title");
         const published = matchTag(block, "published").slice(0, 10);
+        const updated = matchTag(block, "updated");
+        const thumbnailUrl =
+          matchAttribute(block, "media:thumbnail", "url") ||
+          `https://i.ytimg.com/vi/${videoId}/hqdefault.jpg`;
         const summary = excerpt(
           matchTag(block, "media:description") || "Watch this Genesis Mesh video on YouTube.",
         );
@@ -75,15 +97,17 @@ export async function getYoutubeVideos(): Promise<FeedVideo[]> {
               title,
               videoId,
               published: published || "Latest",
+              updated,
               summary,
+              thumbnailUrl,
             }
           : null;
       })
       .filter((video): video is FeedVideo => Boolean(video));
 
-    return parsed.length ? parsed : videos;
+    return parsed.length ? parsed : fallbackVideos;
   } catch {
-    return videos;
+    return fallbackVideos;
   }
 }
 
