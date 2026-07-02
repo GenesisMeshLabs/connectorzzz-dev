@@ -1,5 +1,4 @@
 import { articles, videos } from "@/content/genesismesh";
-import { siteLinks } from "@/content/site";
 
 export type FeedVideo = {
   title: string;
@@ -15,10 +14,14 @@ export type FeedArticle = {
   href: string;
   channel: string;
   summary: string;
+  published?: string;
 };
 
 const youtubeFeedUrl =
   "https://www.youtube.com/feeds/videos.xml?channel_id=UCXwK8VWAwnlI_0zmXcuywYA";
+const patreonCampaignId = "16329594";
+const patreonPostsApiUrl =
+  `https://www.patreon.com/api/posts?filter[campaign_id]=${patreonCampaignId}&sort=-published_at&page[count]=100`;
 
 const fallbackVideos: FeedVideo[] = videos.map((video) => ({
   ...video,
@@ -112,22 +115,82 @@ export async function getYoutubeVideos(): Promise<FeedVideo[]> {
   }
 }
 
-function extractJsonString(source: string, key: string) {
-  const match = source.match(new RegExp(`"${key}"\\s*:\\s*"((?:\\\\.|[^"\\\\])*)"`, "i"));
-  return match ? decodeEntities(match[1].replace(/\\"/g, '"')) : "";
-}
-
-function titleFromSlug(url: string) {
-  const slug = url.split("/").pop()?.replace(/-\d+$/, "") ?? "Genesis Mesh article";
-  return slug
-    .split("-")
-    .filter(Boolean)
-    .map((part) => part.charAt(0).toUpperCase() + part.slice(1))
-    .join(" ");
-}
-
 function articleKey(article: Pick<FeedArticle, "title" | "href">) {
   return `${article.title.toLowerCase()}|${article.href}`;
+}
+
+type PatreonPostNode = {
+  type?: string;
+  text?: string;
+  content?: PatreonPostNode[];
+};
+
+type PatreonPost = {
+  id: string;
+  attributes?: {
+    title?: string;
+    url?: string;
+    published_at?: string;
+    content_json_string?: string;
+  };
+};
+
+function collectPatreonText(node: PatreonPostNode, parts: string[] = []) {
+  if (node.type === "text" && node.text) {
+    parts.push(node.text);
+  }
+
+  if (Array.isArray(node.content)) {
+    for (const child of node.content) {
+      collectPatreonText(child, parts);
+    }
+  }
+
+  return parts;
+}
+
+function summaryFromPatreonContent(contentJsonString?: string) {
+  if (!contentJsonString) {
+    return "";
+  }
+
+  try {
+    const doc = JSON.parse(contentJsonString) as PatreonPostNode;
+    return excerpt(collectPatreonText(doc).join(" "), 220);
+  } catch {
+    return "";
+  }
+}
+
+function parsePatreonPosts(payload: unknown): FeedArticle[] {
+  const data = (payload as { data?: PatreonPost[] }).data;
+  if (!Array.isArray(data)) {
+    return [];
+  }
+
+  const parsed: FeedArticle[] = [];
+
+  for (const post of data) {
+    const attrs = post.attributes;
+    const title = attrs?.title?.trim();
+    const href = attrs?.url?.trim();
+
+    if (!title || !href) {
+      continue;
+    }
+
+    parsed.push({
+      title,
+      href,
+      channel: "Patreon",
+      published: attrs?.published_at?.slice(0, 10),
+      summary:
+        summaryFromPatreonContent(attrs?.content_json_string) ||
+        "Read this Genesis Mesh article on Patreon.",
+    });
+  }
+
+  return parsed;
 }
 
 export async function getPatreonArticles(): Promise<FeedArticle[]> {
@@ -139,10 +202,10 @@ export async function getPatreonArticles(): Promise<FeedArticle[]> {
   }));
 
   try {
-    const response = await fetch(siteLinks.patreon, {
-      next: { revalidate: 3600 },
+    const response = await fetch(patreonPostsApiUrl, {
+      cache: "no-store",
       headers: {
-        Accept: "text/html,application/xhtml+xml",
+        Accept: "application/vnd.api+json, application/json;q=0.9, */*;q=0.8",
         "User-Agent": "ConnectorzzzDev/1.0 (+https://dev.connectorzzz.com)",
       },
     });
@@ -151,65 +214,13 @@ export async function getPatreonArticles(): Promise<FeedArticle[]> {
       return fallbackArticles;
     }
 
-    const html = await response.text();
-    const urls = [
-      ...new Set(
-        [...html.matchAll(/https:\/\/www\.patreon\.com\/GenesisMeshLabs\/posts\/[^"'<\\\s]+/g)]
-          .map((match) => decodeEntities(match[0]).split("?")[0])
-          .filter((url) => !url.includes("/comments")),
-      ),
-    ];
-
-    const parsed = urls.map((href) => {
-      const fallback = fallbackArticles.find((article) => article.href === href);
-      const index = html.indexOf(href.replace(/\//g, "\\u002F")) >= 0
-        ? html.indexOf(href.replace(/\//g, "\\u002F"))
-        : html.indexOf(href);
-      const nearby = index >= 0 ? html.slice(Math.max(0, index - 5000), index + 5000) : "";
-      const extractedTitle = extractJsonString(nearby, "title");
-      const title =
-        fallback && (!extractedTitle || extractedTitle.length < fallback.title.length)
-          ? fallback.title
-          : extractedTitle || titleFromSlug(href);
-      const summary =
-        excerpt(
-          extractJsonString(nearby, "contentTeaserText") ||
-            extractJsonString(nearby, "description") ||
-            fallback?.summary ||
-            "",
-        ) ||
-        "Read this Genesis Mesh article on Patreon.";
-
-      return {
-        title,
-        href,
-        channel: "Patreon",
-        summary,
-      };
-    });
+    const parsed = parsePatreonPosts(await response.json());
 
     if (!parsed.length) {
       return fallbackArticles;
     }
 
-    const merged = [...fallbackArticles];
-    for (const liveArticle of parsed) {
-      const exactIndex = merged.findIndex((article) => article.href === liveArticle.href);
-      if (exactIndex >= 0) {
-        merged[exactIndex] = {
-          ...merged[exactIndex],
-          href: liveArticle.href,
-          summary: liveArticle.summary || merged[exactIndex].summary,
-        };
-        continue;
-      }
-
-      if (!merged.some((article) => article.title.toLowerCase() === liveArticle.title.toLowerCase())) {
-        merged.push(liveArticle);
-      }
-    }
-
-    return [...new Map(merged.map((article) => [articleKey(article), article])).values()];
+    return [...new Map(parsed.map((article) => [articleKey(article), article])).values()];
   } catch {
     return fallbackArticles;
   }
