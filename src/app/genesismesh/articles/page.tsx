@@ -7,6 +7,8 @@ import { pageMetadata } from "@/content/metadata";
 import { articlesFollowCta, pageIntros } from "@/content/pages";
 import { getPatreonArticles } from "@/lib/content-feeds";
 
+export const dynamic = "force-dynamic";
+
 export const metadata: Metadata = pageMetadata({
   title: "Genesis Mesh Articles",
   description:
