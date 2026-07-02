@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { ArrowUpRight } from "lucide-react";
+import { ArrowUpRight, FileText } from "lucide-react";
 import { BrandIcon } from "@/components/brand-icons";
 import { PageShell } from "@/components/site-shell";
 import { SectionIntro } from "@/components/ui";
@@ -37,7 +37,7 @@ export default async function ArticlesPage() {
           </a>
         </div>
         <div className="mt-12 grid gap-5 md:grid-cols-2 xl:grid-cols-3">
-          {articles.map((article, index) => (
+          {articles.map((article) => (
             <a
               key={article.href}
               href={article.href}
@@ -52,8 +52,9 @@ export default async function ArticlesPage() {
               </div>
               <div className="relative flex w-full flex-col">
                 <div className="pr-12">
-                  <p className="font-mono text-xs font-semibold uppercase tracking-[0.18em] text-[#d9ff61]">
-                    Article {String(index + 1).padStart(2, "0")}
+                  <p className="inline-flex items-center gap-2 font-mono text-xs font-semibold uppercase tracking-[0.18em] text-[#d9ff61]">
+                    <FileText size={14} aria-hidden="true" />
+                    Article
                   </p>
                   <p className="mt-2 text-xs font-semibold uppercase tracking-[0.16em] text-zinc-500">
                     {article.channel}
