@@ -1,4 +1,4 @@
-import { BookOpen, Code2, FileText, Play, ShieldCheck } from "lucide-react";
+import { BookOpen, Code2, FileText, Play, ShieldCheck, Waypoints } from "lucide-react";
 import type { LucideIcon } from "lucide-react";
 import { siteLinks } from "@/content/site";
 
@@ -11,6 +11,13 @@ export type PageIntro = {
 export type RouteCard = PageIntro & {
   href: string;
   icon: LucideIcon;
+};
+
+export const howItWorksCta = {
+  title: "How it works",
+  href: "/concepts/how-genesis-mesh-works/foundation",
+  description: "An interactive map of the foundation, a governed action, and how they connect.",
+  icon: Waypoints,
 };
 
 export const homeHubContent = {
@@ -26,6 +33,10 @@ export const homeHubContent = {
     secondaryCta: {
       label: "View on GitHub",
       href: siteLinks.githubOrg,
+    },
+    exploreCta: {
+      label: "See how Genesis Mesh works",
+      href: howItWorksCta.href,
     },
   },
   trustNodes: [
@@ -60,6 +71,13 @@ export const genesisMeshRouteCards: RouteCard[] = [
     href: "/genesismesh/start-here",
     description: "A short explainer for new visitors.",
     icon: ShieldCheck,
+  },
+  {
+    eyebrow: "",
+    title: howItWorksCta.title,
+    href: howItWorksCta.href,
+    description: howItWorksCta.description,
+    icon: howItWorksCta.icon,
   },
   {
     eyebrow: "",
