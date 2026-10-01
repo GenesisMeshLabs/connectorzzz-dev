@@ -10,7 +10,7 @@ import { howItWorksPage } from "@/content/how-genesis-mesh-works";
 export default function HowGenesisMeshWorksLayout({ children }: { children: React.ReactNode }) {
   return (
     <PageShell>
-      <section className="page-section">
+      <section className="page-section relative">
         <header className="max-w-3xl">
           <p className="section-eyebrow">{howItWorksPage.eyebrow}</p>
           <h1 className="page-title">{howItWorksPage.title}</h1>
