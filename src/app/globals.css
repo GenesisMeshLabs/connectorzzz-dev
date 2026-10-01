@@ -32,6 +32,9 @@
     radial-gradient(circle at 72% 34%, rgba(217, 255, 97, 0.14), transparent 34%),
     linear-gradient(90deg, #070807 0%, rgba(7, 8, 7, 0.92) 45%, rgba(7, 8, 7, 0.72) 100%);
   --hero-scrim-page: linear-gradient(90deg, #070807 0%, rgba(7, 8, 7, 0.94) 48%, rgba(7, 8, 7, 0.62) 100%);
+  --scrollbar-thumb: rgb(255 255 255 / 0.16);
+  --scrollbar-thumb-hover: rgb(255 255 255 / 0.32);
+  color-scheme: dark;
 }
 
 :root[data-theme="light"] {
@@ -55,6 +58,8 @@
     radial-gradient(circle at 72% 34%, rgba(217, 255, 97, 0.3), transparent 38%),
     linear-gradient(90deg, #f4f5ef 0%, rgba(244, 245, 239, 0.94) 45%, rgba(244, 245, 239, 0.8) 100%);
   --hero-scrim-page: linear-gradient(90deg, #f4f5ef 0%, rgba(244, 245, 239, 0.95) 48%, rgba(244, 245, 239, 0.72) 100%);
+  --scrollbar-thumb: rgb(11 13 10 / 0.2);
+  --scrollbar-thumb-hover: rgb(11 13 10 / 0.38);
   color-scheme: light;
 }
 
@@ -89,6 +94,43 @@ body {
 html {
   scroll-behavior: smooth;
   overflow-x: clip;
+}
+
+/*
+ * Thin, theme-aware scrollbars across the site. Chrome, Edge and Safari use
+ * the WebKit rules (rounded thumb, no arrow buttons, hover state); Firefox,
+ * which has no WebKit scrollbar styling, uses the standard properties.
+ */
+@supports not selector(::-webkit-scrollbar) {
+  * {
+    scrollbar-width: thin;
+    scrollbar-color: var(--scrollbar-thumb) transparent;
+  }
+}
+
+*::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+*::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+*::-webkit-scrollbar-thumb {
+  border: 2px solid transparent;
+  border-radius: 999px;
+  background: var(--scrollbar-thumb) padding-box;
+}
+
+*::-webkit-scrollbar-thumb:hover {
+  background: var(--scrollbar-thumb-hover) padding-box;
+}
+
+*::-webkit-scrollbar-corner,
+*::-webkit-scrollbar-button {
+  display: none;
+  background: transparent;
 }
 
 ::selection {
