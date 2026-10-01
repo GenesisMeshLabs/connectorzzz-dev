@@ -71,6 +71,9 @@ export default function RootLayout({
   return (
     <html
       lang="en"
+      // Lets Next.js suspend the global smooth scrolling during route changes,
+      // so navigations land instantly at the right position.
+      data-scroll-behavior="smooth"
       className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}
       suppressHydrationWarning
     >
