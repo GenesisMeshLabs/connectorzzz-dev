@@ -11,6 +11,7 @@ export const siteConfig = {
 export const siteLinks = {
   home: siteConfig.url,
   genesisMesh: "https://genesismesh.connectorzzz.com/",
+  genesisMeshGlossary: "https://genesismesh.connectorzzz.com/concepts/glossary.html",
   githubOrg: "https://github.com/GenesisMeshLabs",
   githubCore: "https://github.com/GenesisMeshLabs/genesismesh",
   githubCoreStargazers: "https://github.com/GenesisMeshLabs/genesismesh/stargazers",
@@ -26,11 +27,18 @@ export const siteLinks = {
 export type NavItem = {
   label: string;
   href: string;
+  /** Also mark the item active for any route under this prefix. */
+  activePrefix?: string;
 };
 
 export const navItems: NavItem[] = [
   { label: "Home", href: "/" },
   { label: "Genesis Mesh", href: "/genesismesh" },
+  {
+    label: "How it works",
+    href: "/concepts/how-genesis-mesh-works/foundation",
+    activePrefix: "/concepts/how-genesis-mesh-works",
+  },
   { label: "SDKs", href: "/genesismesh/sdks" },
   { label: "Docs", href: "/genesismesh/docs" },
   { label: "Videos", href: "/genesismesh/videos" },
@@ -75,6 +83,9 @@ export const sitemapRoutes = [
   { path: "/", priority: 1 },
   { path: "/genesismesh", priority: 0.9 },
   { path: "/genesismesh/start-here", priority: 0.85 },
+  { path: "/concepts/how-genesis-mesh-works/foundation", priority: 0.85 },
+  { path: "/concepts/how-genesis-mesh-works/governed-action", priority: 0.85 },
+  { path: "/concepts/how-genesis-mesh-works/full-model", priority: 0.85 },
   { path: "/genesismesh/sdks", priority: 0.8 },
   { path: "/genesismesh/docs", priority: 0.8 },
   { path: "/genesismesh/videos", priority: 0.8 },
