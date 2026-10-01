@@ -367,7 +367,7 @@ export function HowItWorksExplorer() {
 
       <div className="mt-6 flex flex-wrap items-center justify-between gap-3">
         <p className="text-sm text-ink-400">{howItWorksPage.hint}</p>
-        <div className="flex gap-2">
+        <div className="flex flex-wrap gap-2">
           <button
             type="button"
             onClick={() => select("genesis-mesh")}
