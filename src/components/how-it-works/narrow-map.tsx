@@ -189,7 +189,7 @@ function NarrowNode({ node, interaction }: { node: StageNode; interaction: MapIn
   const dimmed = highlight.size > 0 && idInView(node.id, view) && !highlight.has(node.id);
 
   return (
-    <div className="relative min-w-0 transition-opacity duration-300" style={{ opacity: dimmed ? 0.4 : 1 }}>
+    <div className="relative min-w-0 transition-opacity duration-300" style={{ opacity: dimmed ? 0.6 : 1 }}>
       <button
         type="button"
         onClick={() => onSelect(node.id)}
@@ -249,7 +249,7 @@ function DetailChip({ id, interaction }: { id: string; interaction: MapInteracti
           ? "border-accent-ink bg-accent text-on-accent"
           : "border-ink/15 bg-surface-raised text-ink hover:border-accent-ink/70",
       ].join(" ")}
-      style={{ opacity: dimmed ? 0.4 : 1 }}
+      style={{ opacity: dimmed ? 0.6 : 1 }}
     >
       {conceptsById[id].name}
     </button>
