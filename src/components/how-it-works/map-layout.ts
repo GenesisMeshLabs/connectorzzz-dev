@@ -341,22 +341,36 @@ export function edgeGeometry(a: NodeBox, b: NodeBox): EdgeGeometry {
 
 export type Camera = { scale: number; x: number; y: number; height: number };
 
+/** Below this the Full Model text gets too small; pan instead of shrinking further. */
+const FULL_MODEL_MIN_SCALE = 0.78;
+
 /**
  * Where the camera looks for each view. Single-story views frame one lane and
- * leave the other side of the stage for the explanation panel; the Full Model
- * frames both lanes.
+ * leave the other side of the stage for the explanation panel. The Full
+ * Model frames both lanes; when a concept is open it makes room for the
+ * panel on the right, and if both lanes no longer fit at a readable size it
+ * pans to keep the selected concept in view instead.
  */
-export function cameraFor(view: ViewId, layout: MapLayout, stageWidth: number, panelWidth: number): Camera {
+export function cameraFor(
+  view: ViewId,
+  layout: MapLayout,
+  stageWidth: number,
+  panelWidth: number,
+  focus: NodeBox | null = null,
+): Camera {
   if (view === "full-model") {
     const left = layout.frames.foundation.x;
     const right = layout.frames["governed-action"].x + layout.frames["governed-action"].w;
-    const scale = Math.min(1, stageWidth / (right - left));
-    return {
-      scale,
-      x: (stageWidth - (right - left) * scale) / 2 - left * scale,
-      y: 0,
-      height: layout.height * scale,
-    };
+    const contentWidth = right - left;
+    const available = focus ? stageWidth - panelWidth - 24 : stageWidth;
+    const fit = available / contentWidth;
+    const scale = Math.min(1, focus ? Math.max(fit, FULL_MODEL_MIN_SCALE) : fit);
+    let x = (available - contentWidth * scale) / 2 - left * scale;
+    if (focus && contentWidth * scale > available) {
+      const centre = focus.x + focus.w / 2;
+      x = clamp(available / 2 - centre * scale, available - right * scale, -left * scale);
+    }
+    return { scale, x, y: 0, height: layout.height * scale };
   }
 
   const frame = layout.frames[view];
