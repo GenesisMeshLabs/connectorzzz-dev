@@ -24,7 +24,7 @@ export function ViewSwitch({ view, selectedId }: { view: ViewId; selectedId: str
                 scroll={false}
                 aria-current={active ? "page" : undefined}
                 className={[
-                  "flex h-10 items-center justify-center rounded-md px-2 text-center text-[13px] leading-tight font-semibold transition sm:px-5 sm:text-sm sm:whitespace-nowrap",
+                  "flex h-10 items-center justify-center rounded-md px-1.5 text-center text-[12.5px] leading-tight font-semibold whitespace-nowrap transition sm:px-5 sm:text-sm",
                   active ? "bg-accent text-on-accent shadow-sm" : "text-ink-300 hover:bg-ink/10 hover:text-ink",
                 ].join(" ")}
               >

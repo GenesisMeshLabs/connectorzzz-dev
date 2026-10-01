@@ -192,6 +192,11 @@ html {
   stroke-opacity: 0.85;
 }
 
+.hiw-edge-lit {
+  stroke-opacity: 1;
+  filter: drop-shadow(0 0 3px color-mix(in oklab, var(--accent) 70%, transparent));
+}
+
 .hiw-flow {
   stroke: var(--ink-300);
   stroke-opacity: 0.55;
@@ -206,11 +211,6 @@ html {
   stroke-opacity: 1;
 }
 
-.hiw-edge-lit {
-  stroke-opacity: 1;
-  filter: drop-shadow(0 0 3px color-mix(in oklab, var(--accent) 70%, transparent));
-}
-
 .hiw-flow-lit {
   stroke-width: 3.4;
   animation-duration: 0.9s;
@@ -222,8 +222,9 @@ html {
     0 0 22px -6px color-mix(in oklab, var(--accent) 55%, transparent);
 }
 
-.hiw-drop {
-  animation: hiw-drop 1.8s ease-in infinite;
+/* A single dot travelling down the mobile story timeline. */
+.hiw-travel {
+  animation: hiw-travel 6s ease-in-out infinite;
 }
 
 @keyframes hiw-flow {
@@ -232,43 +233,24 @@ html {
   }
 }
 
-@keyframes hiw-drop {
+@keyframes hiw-travel {
   from {
-    transform: translate(-50%, -4px);
+    top: 0;
     opacity: 0;
   }
-  30% {
+  10%,
+  90% {
     opacity: 1;
   }
   to {
-    transform: translate(-50%, 26px);
+    top: 100%;
     opacity: 0;
   }
 }
 
 @media (prefers-reduced-motion: reduce) {
   .hiw-flow,
-  .hiw-edge-lit {
-  stroke-opacity: 1;
-  filter: drop-shadow(0 0 3px color-mix(in oklab, var(--accent) 70%, transparent));
-}
-
-.hiw-flow-lit {
-  stroke-width: 3.4;
-  animation-duration: 0.9s;
-}
-
-.hiw-node-lit {
-  box-shadow:
-    0 0 0 1px color-mix(in oklab, var(--accent) 35%, transparent),
-    0 0 22px -6px color-mix(in oklab, var(--accent) 55%, transparent);
-}
-
-.hiw-drop {
-    animation: none;
-  }
-
-  .hiw-flow {
+  .hiw-travel {
     display: none;
   }
 }
