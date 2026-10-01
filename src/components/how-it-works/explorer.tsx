@@ -214,22 +214,19 @@ export function HowItWorksExplorer() {
       window.history.replaceState(null, "", `#${id}`);
       window.dispatchEvent(new Event(HASH_EVENT));
 
-      // In the wide Full Model the explanation docks at the bottom of the
-      // viewport; keep the selected concept visible above it.
+      // In the wide Full Model the camera re-frames around the selection;
+      // once it settles, make sure the concept is on screen vertically too.
       if (view === "full-model" && window.matchMedia("(min-width: 1200px)").matches) {
-        requestAnimationFrame(() => {
+        window.setTimeout(() => {
           const node = document.querySelector(`[data-node-id="${id}"]`);
-          if (!node) {
-            return;
-          }
-          const box = node.getBoundingClientRect();
-          if (box.bottom > window.innerHeight * 0.55 || box.top < 80) {
+          const box = node?.getBoundingClientRect();
+          if (box && (box.bottom > window.innerHeight - 24 || box.top < 80)) {
             window.scrollBy({
               top: box.top - window.innerHeight * 0.3,
               behavior: reducedMotion ? "auto" : "smooth",
             });
           }
-        });
+        }, reducedMotion ? 0 : 720);
       }
     },
     [router, view, reducedMotion],
@@ -323,11 +320,12 @@ export function HowItWorksExplorer() {
   };
 
   const panelWidth = Math.round(Math.min(420, Math.max(340, stageWidth * 0.32)));
-  const camera = cameraFor(view, targetLayout, stageWidth, panelWidth);
   const fullModel = view === "full-model";
-  const stageHeight = Math.round(fullModel ? camera.height + 8 : Math.max(camera.height, 640));
-
-  const dockOpen = fullModel && Boolean(selected);
+  const focusBox = fullModel && selectedId ? (targetLayout.nodes[selectedId] ?? null) : null;
+  const camera = cameraFor(view, targetLayout, stageWidth, panelWidth, focusBox);
+  const stageHeight = Math.round(Math.max(camera.height + 8, fullModel && !selected ? 0 : 640));
+  // In the Full Model the panel only appears once a concept is selected.
+  const panelVisible = !fullModel || Boolean(selected);
   const transition = animate
     ? "left 700ms cubic-bezier(0.22, 0.8, 0.24, 1), opacity 300ms ease, transform 400ms ease"
     : undefined;
@@ -391,67 +389,57 @@ export function HowItWorksExplorer() {
         </div>
       </div>
 
-      {/* Desktop: one fixed map, three camera positions. */}
-      <div ref={stageRef} className="relative mt-4 hidden min-[1200px]:block">
+      {/* Desktop: one fixed map, three camera positions. The Full Model gets a wider stage on large screens. */}
+      <div
+        ref={stageRef}
+        className="relative mt-4 hidden min-[1200px]:block"
+        style={
+          fullModel
+            ? { width: "min(calc(100vw - 4rem), 1560px)", marginLeft: "calc(50% - min(calc(50vw - 2rem), 780px))" }
+            : undefined
+        }
+      >
         <div
           className="relative overflow-clip rounded-xl"
           style={{
             height: stageHeight,
-            // Room for the dock, so it never covers the end of the map.
-            marginBottom: dockOpen ? "calc(40svh + 1rem)" : 0,
-            transition: animate
-              ? "height 700ms cubic-bezier(0.22, 0.8, 0.24, 1), margin-bottom 300ms ease"
-              : undefined,
+            transition: animate ? "height 700ms cubic-bezier(0.22, 0.8, 0.24, 1)" : undefined,
           }}
         >
           <WideMap layout={layout} camera={camera} animate={animate} interaction={interaction} />
 
-          {/* Single-story views: the explanation takes the side the other story left free. */}
+          {/* When the Full Model camera pans, fade the edge where the map runs off the stage. */}
+          <div
+            aria-hidden="true"
+            className="pointer-events-none absolute inset-y-0 left-0 z-10 w-16 bg-gradient-to-r from-canvas to-transparent transition-opacity duration-500"
+            style={{ opacity: fullModel && camera.x < -targetLayout.frames.foundation.x * camera.scale - 1 ? 1 : 0 }}
+          />
+
+          {/*
+            The explanation panel. Single-story views use the side the other
+            story left free; the Full Model opens it on the right and the
+            camera makes room, so it never sits on top of the diagram.
+          */}
           <aside
             aria-label="Concept explanation"
             className="absolute top-0 bottom-0 z-20"
             style={{
               width: panelWidth,
               left: view === "governed-action" ? 0 : stageWidth - panelWidth,
-              opacity: fullModel ? 0 : 1,
-              pointerEvents: fullModel ? "none" : undefined,
+              opacity: panelVisible ? 1 : 0,
+              transform: panelVisible ? "none" : "translateX(24px)",
+              pointerEvents: panelVisible ? undefined : "none",
               transition,
             }}
-            inert={fullModel}
+            inert={!panelVisible}
           >
             <div className="sticky top-20 max-h-[calc(100svh-6rem)] overflow-y-auto overscroll-contain rounded-xl border border-ink/10 bg-surface p-6">
-              {selected && !fullModel ? (
+              {selected ? (
                 <ConceptPanel key={selected.id} concept={selected} view={view} onClose={clear} onSelect={select} />
               ) : (
                 <StoryIntroPanel view={view} onSelect={select} />
               )}
             </div>
-          </aside>
-        </div>
-
-        {/* Full Model: the map keeps the whole width; the explanation docks below it. */}
-        <div className="sticky bottom-4 z-30 h-0">
-          <aside
-            aria-label="Concept explanation"
-            className="absolute inset-x-0 bottom-0 max-h-[40svh] overflow-y-auto overscroll-contain rounded-xl border border-ink/15 bg-surface p-6 shadow-2xl shadow-black/40"
-            style={{
-              opacity: dockOpen ? 1 : 0,
-              transform: dockOpen ? "none" : "translateY(24px)",
-              pointerEvents: dockOpen ? undefined : "none",
-              transition,
-            }}
-            inert={!dockOpen}
-          >
-            {dockOpen && selected ? (
-              <ConceptPanel
-                key={selected.id}
-                concept={selected}
-                view={view}
-                onClose={clear}
-                onSelect={select}
-                variant="dock"
-              />
-            ) : null}
           </aside>
         </div>
       </div>
