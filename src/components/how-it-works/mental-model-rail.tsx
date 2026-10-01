@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { Pause, Play } from "lucide-react";
+import { ChevronLeft, ChevronRight, Pause, Play } from "lucide-react";
 import { conceptsById, mentalModel } from "@/content/how-genesis-mesh-works";
 
 const STEP_MS = 2800;
@@ -78,7 +78,66 @@ export function MentalModelRail({
         </div>
       </div>
 
-      <ol className="-mx-1 mt-4 flex snap-x gap-1 overflow-x-auto px-1 pb-1 [scrollbar-width:thin] lg:flex-wrap lg:gap-y-2 lg:overflow-visible">
+      {/* Phones: one question at a time. */}
+      <div className="mt-4 sm:hidden">
+        <div className="flex items-center gap-2">
+          <button
+            type="button"
+            onClick={() => {
+              setPlaying(false);
+              onStep(activeStep === null ? steps.length - 1 : Math.max(0, activeStep - 1));
+            }}
+            disabled={activeStep === 0}
+            aria-label="Previous question"
+            className="flex h-10 w-10 shrink-0 items-center justify-center rounded-md border border-ink/15 text-ink transition disabled:opacity-30"
+          >
+            <ChevronLeft size={18} aria-hidden="true" />
+          </button>
+          <button
+            type="button"
+            onClick={() => {
+              setPlaying(false);
+              onStep(activeStep === null ? 0 : null);
+            }}
+            className={[
+              "min-h-10 min-w-0 flex-1 rounded-md border px-3 py-2 text-left transition",
+              activeStep === null ? "border-ink/10 bg-ink/[0.03]" : "border-accent-ink bg-accent text-on-accent",
+            ].join(" ")}
+          >
+            <span className="block font-mono text-[10px] font-semibold tracking-[0.14em] opacity-70">
+              {activeStep === null ? `${steps.length} QUESTIONS` : `${activeStep + 1} / ${steps.length}`}
+            </span>
+            <span className={["block text-[15px] leading-5 font-semibold", activeStep === null ? "text-ink" : ""].join(" ")}>
+              {steps[activeStep ?? 0].question}
+            </span>
+          </button>
+          <button
+            type="button"
+            onClick={() => {
+              setPlaying(false);
+              onStep(activeStep === null ? 0 : Math.min(steps.length - 1, activeStep + 1));
+            }}
+            disabled={activeStep === steps.length - 1}
+            aria-label="Next question"
+            className="flex h-10 w-10 shrink-0 items-center justify-center rounded-md border border-ink/15 text-ink transition disabled:opacity-30"
+          >
+            <ChevronRight size={18} aria-hidden="true" />
+          </button>
+        </div>
+        <div className="mt-3 flex justify-center gap-1.5" aria-hidden="true">
+          {steps.map((step, index) => (
+            <span
+              key={step.question}
+              className={[
+                "h-1.5 rounded-full transition-all",
+                index === activeStep ? "w-5 bg-accent-ink" : activeStep !== null && index < activeStep ? "w-1.5 bg-accent-ink/50" : "w-1.5 bg-ink/20",
+              ].join(" ")}
+            />
+          ))}
+        </div>
+      </div>
+
+      <ol className="-mx-1 mt-4 hidden snap-x gap-1 overflow-x-auto px-1 pb-1 [scrollbar-width:thin] sm:flex sm:flex-wrap sm:gap-y-2 sm:overflow-visible">
         {steps.map((step, index) => {
           const active = index === activeStep;
           const passed = activeStep !== null && index < activeStep;

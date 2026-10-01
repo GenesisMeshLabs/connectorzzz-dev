@@ -98,35 +98,36 @@ function interpolate(from: MapLayout, to: MapLayout, t: number): MapLayout {
 
 /** Animates node positions between layouts so nodes and edges move together. */
 function useTweenedLayout(target: MapLayout, animate: boolean) {
-  const [display, setDisplay] = useState(target);
+  // The in-between frame while a tween runs; null means "show the target".
+  const [frame, setFrame] = useState<MapLayout | null>(null);
   const current = useRef(target);
 
   useEffect(() => {
-    if (!animate) {
+    const from = current.current;
+    if (!animate || from === target) {
       current.current = target;
       return;
     }
-    const from = current.current;
-    if (from === target) {
-      return;
-    }
     const startedAt = performance.now();
-    let frame = 0;
+    let handle = 0;
     const step = (now: number) => {
       const progress = Math.min(1, (now - startedAt) / TWEEN_MS);
       const eased = 1 - Math.pow(1 - progress, 3);
-      const next = progress === 1 ? target : interpolate(from, target, eased);
-      current.current = next;
-      setDisplay(next);
-      if (progress < 1) {
-        frame = requestAnimationFrame(step);
+      if (progress === 1) {
+        current.current = target;
+        setFrame(null);
+        return;
       }
+      const next = interpolate(from, target, eased);
+      current.current = next;
+      setFrame(next);
+      handle = requestAnimationFrame(step);
     };
-    frame = requestAnimationFrame(step);
-    return () => cancelAnimationFrame(frame);
+    handle = requestAnimationFrame(step);
+    return () => cancelAnimationFrame(handle);
   }, [target, animate]);
 
-  return animate ? display : target;
+  return animate && frame ? frame : target;
 }
 
 export function HowItWorksExplorer() {
@@ -180,10 +181,23 @@ export function HowItWorksExplorer() {
     }
   }, [hashConcept, view, router]);
 
-  // Deep links land on the map rather than the top of the page.
+  // Deep links land on the linked concept rather than the top of the page.
   useEffect(() => {
-    if (conceptsById[readHash()]) {
-      explorerRef.current?.scrollIntoView({ block: "start" });
+    const id = readHash();
+    if (!conceptsById[id]) {
+      return;
+    }
+    explorerRef.current?.scrollIntoView({ block: "start" });
+    if (window.matchMedia("(min-width: 1200px)").matches) {
+      // Wait for the cluster to open and the camera to settle.
+      const timer = window.setTimeout(() => {
+        const node = document.querySelector(`[data-node-id="${id}"]`);
+        const box = node?.getBoundingClientRect();
+        if (box && (box.top < 80 || box.bottom > window.innerHeight * 0.75)) {
+          window.scrollBy({ top: box.top - window.innerHeight * 0.3 });
+        }
+      }, 800);
+      return () => window.clearTimeout(timer);
     }
   }, []);
 
@@ -330,14 +344,14 @@ export function HowItWorksExplorer() {
 
       {fullModel ? (
         <div className="mt-6 grid grid-cols-[minmax(0,1fr)] gap-4">
-          <div className="grid gap-3 text-[15px] leading-7 text-ink-300 lg:grid-cols-2">
+          <div className="grid gap-3 text-sm leading-6 text-ink-300 sm:text-[15px] sm:leading-7 lg:grid-cols-2">
             {fullModelIntro.lead.map((line) => (
               <p key={line}>{line}</p>
             ))}
           </div>
-          <ol className="flex flex-wrap items-center gap-x-2 gap-y-1.5 font-mono text-xs text-ink-400">
+          <ol className="-mx-4 flex items-center gap-x-2 gap-y-1.5 overflow-x-auto px-4 pb-1 font-mono text-xs text-ink-400 [scrollbar-width:none] sm:mx-0 sm:flex-wrap sm:overflow-visible sm:px-0">
             {fullModelIntro.chain.map((step, index) => (
-              <li key={step} className="flex items-center gap-2">
+              <li key={step} className="flex shrink-0 items-center gap-2 whitespace-nowrap">
                 <span className="rounded-sm border border-ink/10 bg-ink/[0.04] px-2 py-1 text-ink-200">{step}</span>
                 {index < fullModelIntro.chain.length - 1 ? (
                   <span aria-hidden="true" className="text-accent-ink">
@@ -357,7 +371,7 @@ export function HowItWorksExplorer() {
           <button
             type="button"
             onClick={() => select("genesis-mesh")}
-            className="inline-flex h-9 items-center gap-2 rounded-md border border-ink/15 bg-ink/[0.05] px-3 text-sm font-semibold text-ink transition hover:border-accent-ink/70"
+            className="inline-flex h-9 items-center gap-1.5 rounded-md border border-ink/15 bg-ink/[0.05] px-2.5 text-[13px] font-semibold whitespace-nowrap text-ink transition hover:border-accent-ink/70 sm:gap-2 sm:px-3 sm:text-sm"
           >
             <CircleHelp size={16} aria-hidden="true" />
             What is Genesis Mesh?
@@ -365,7 +379,7 @@ export function HowItWorksExplorer() {
           <button
             type="button"
             onClick={toggleAll}
-            className="inline-flex h-9 items-center gap-2 rounded-md border border-ink/15 bg-ink/[0.05] px-3 text-sm font-semibold text-ink transition hover:border-accent-ink/70"
+            className="inline-flex h-9 items-center gap-1.5 rounded-md border border-ink/15 bg-ink/[0.05] px-2.5 text-[13px] font-semibold whitespace-nowrap text-ink transition hover:border-accent-ink/70 sm:gap-2 sm:px-3 sm:text-sm"
           >
             {allExpanded ? (
               <ChevronsDownUp size={16} aria-hidden="true" />
@@ -443,13 +457,13 @@ export function HowItWorksExplorer() {
       </div>
 
       {/* Phones and tablets: the same stages stacked, with a bottom sheet. */}
-      <div className="mt-6 min-[1200px]:hidden">
-        <NarrowMap interaction={interaction} />
+      <div className="mt-5 min-[1200px]:hidden">
         {!fullModel ? (
-          <div className="mt-6 rounded-xl border border-ink/10 bg-surface p-5">
-            <StoryIntroPanel view={view} onSelect={select} />
+          <div className="mb-6">
+            <StoryIntroPanel view={view} onSelect={select} compact />
           </div>
         ) : null}
+        <NarrowMap interaction={interaction} />
 
         <div
           className="fixed inset-0 z-[60] bg-black/40 transition-opacity duration-300"

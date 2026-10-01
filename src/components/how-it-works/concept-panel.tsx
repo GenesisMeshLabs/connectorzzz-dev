@@ -2,13 +2,14 @@
 
 import { useId } from "react";
 import Link from "next/link";
-import { ArrowLeft, ArrowRight, ArrowUpRight, Info, Lightbulb, MapPin, Shapes, X } from "lucide-react";
+import { ArrowLeft, ArrowRight, ArrowUpRight, ChevronDown, Info, Lightbulb, MapPin, Shapes, X } from "lucide-react";
 import {
   conceptsById,
   groupsById,
   howItWorksViews,
   storyConceptOrder,
   stories,
+  type Block,
   type Concept,
   type ViewId,
 } from "@/content/how-genesis-mesh-works";
@@ -258,13 +259,46 @@ function ConceptChip({ id, onSelect }: { id: string; onSelect: (id: string) => v
 export function StoryIntroPanel({
   view,
   onSelect,
+  compact = false,
 }: {
   view: ViewId;
   onSelect: (id: string) => void;
+  /** Phones: just the guiding quote and the start button; the rest folds away. */
+  compact?: boolean;
 }) {
   const story = stories.find((item) => item.id === view);
   if (!story) {
     return null;
+  }
+
+  const start = (
+    <button type="button" onClick={() => onSelect(story.startConcept)} className="btn-primary justify-self-start">
+      Start with {conceptsById[story.startConcept].name}
+      <ArrowRight size={17} aria-hidden="true" />
+    </button>
+  );
+
+  if (compact) {
+    const isQuote = (block: Block) => typeof block !== "string" && "quote" in block;
+    const quotes = story.intro.filter(isQuote);
+    const rest = story.intro.filter((block) => !isQuote(block));
+    return (
+      <div className="grid gap-4">
+        <Blocks blocks={quotes} />
+        <div className="flex flex-wrap items-center gap-x-5 gap-y-3">
+          {start}
+          <details className="group/intro w-full">
+            <summary className="inline-flex cursor-pointer list-none items-center gap-1.5 text-sm font-semibold text-ink-300 [&::-webkit-details-marker]:hidden">
+              About this story
+              <ChevronDown size={15} aria-hidden="true" className="transition-transform group-open/intro:rotate-180" />
+            </summary>
+            <div className="mt-3">
+              <Blocks blocks={rest} />
+            </div>
+          </details>
+        </div>
+      </div>
+    );
   }
 
   return (
@@ -276,10 +310,7 @@ export function StoryIntroPanel({
         <h2 className="mt-2 text-2xl font-semibold text-ink">{story.title}</h2>
       </div>
       <Blocks blocks={story.intro} />
-      <button type="button" onClick={() => onSelect(story.startConcept)} className="btn-primary justify-self-start">
-        Start with {conceptsById[story.startConcept].name}
-        <ArrowRight size={17} aria-hidden="true" />
-      </button>
+      {start}
       <p className="text-sm leading-6 text-ink-400">
         Or select any concept on the map. Concepts marked with a count open up into more detail.
       </p>

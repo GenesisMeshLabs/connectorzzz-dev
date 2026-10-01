@@ -134,7 +134,7 @@ export function WideMap({
         {edges.map(({ relation, shown, lit, geometry }) => {
           const bridge = relation.kind === "bridge";
           const accent = lit || (bridge && !emphasis);
-          const opacity = !shown ? 0 : emphasis && !lit ? 0.08 : 1;
+          const opacity = !shown ? 0 : emphasis && !lit ? 0.18 : 1;
           const moving = relation.kind === "flow" || bridge;
 
           return (
@@ -217,7 +217,7 @@ function MapNode({ node, interaction }: { node: NodeBox; interaction: MapInterac
     width: node.w,
     height: node.h,
     transform: `translate(${node.x}px, ${node.y}px)`,
-    opacity: shown ? (dimmed ? 0.28 : 1) : 0,
+    opacity: shown ? (dimmed ? 0.55 : 1) : 0,
   };
 
   if (node.kind === "group") {

@@ -18,7 +18,7 @@ export function DesktopNav() {
   const pathname = usePathname();
 
   return (
-    <nav className="hidden items-center gap-1 text-sm text-ink-300 md:flex">
+    <nav className="hidden items-center gap-1 text-sm whitespace-nowrap text-ink-300 lg:flex">
       {navItems.map((item) => {
         const active = isActivePath(pathname, item);
 
@@ -46,7 +46,7 @@ export function MobileNav() {
   const pathname = usePathname();
 
   return (
-    <details className="group relative md:hidden">
+    <details className="group relative lg:hidden">
       <summary className="flex h-10 w-10 cursor-pointer list-none items-center justify-center rounded-md border border-ink/15 bg-ink/10 text-ink transition hover:border-accent-ink/70 [&::-webkit-details-marker]:hidden">
         <span className="sr-only">Open navigation menu</span>
         <Menu size={20} aria-hidden="true" />
