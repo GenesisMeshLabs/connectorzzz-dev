@@ -26,6 +26,8 @@ const BRIDGE_CHANNEL_X = MARGIN + LANE_W + LANE_GAP / 2;
 
 const NODE_H = 84;
 const NODE_MAX_W = 184;
+/** Single-step rows (the spines) get wider nodes so both lanes carry the same weight. */
+const SPINE_W = 232;
 const NODE_GAP = 16;
 const ROW_GAP = 40;
 const ROW_LABEL_H = 28;
@@ -34,7 +36,7 @@ const DETAIL_H = 40;
 const DETAIL_GAP = 10;
 const DETAIL_LABEL_H = 22;
 const GROUP_W = 360;
-const GROUP_H = 56;
+const GROUP_H = 64;
 const FRAME_HEAD = 60;
 const FRAME_INSET = 16;
 const FRAME_BOTTOM = 24;
@@ -124,9 +126,9 @@ function layoutStory(
     const centres = stage.nodes.map((node, index) => node.at ?? (index + 0.5) / count).sort((a, b) => a - b);
     const tightest = Math.min(...centres.slice(1).map((centre, index) => (centre - centres[index]) * LANE_W));
     const coreWidth = Math.min(
-      NODE_MAX_W,
+      count === 1 ? SPINE_W : NODE_MAX_W,
       (LANE_W - (count - 1) * NODE_GAP) / count,
-      Number.isFinite(tightest) ? tightest - 12 : NODE_MAX_W,
+      Number.isFinite(tightest) ? tightest - 12 : Infinity,
     );
     if (stage.continues) {
       tiers.push({ key: `${stage.id}-tier`, story: storyId, x: x0 + LANE_W / 2, y1: tierStart, y2: y });
@@ -134,7 +136,7 @@ function layoutStory(
 
     stage.nodes.forEach((node, index) => {
       const isGroup = !conceptsById[node.id];
-      const w = isGroup ? GROUP_W : coreWidth;
+      const w = isGroup ? (count === 1 ? GROUP_W : (LANE_W - (count - 1) * NODE_GAP) / count) : coreWidth;
       const h = isGroup ? GROUP_H : NODE_H;
       const center = x0 + (node.at ?? (index + 0.5) / count) * LANE_W;
       nodes[node.id] = {
@@ -279,7 +281,8 @@ function channelRoute(start: Point, end: Point): EdgeGeometry {
       `Q${x},${end.y} ${x + r * towards},${end.y}`,
       `H${end.x}`,
     ].join(" "),
-    mid: { x, y: (start.y + end.y) / 2 },
+    // Label the bridge where it enters its target, not in the shared channel.
+    mid: end.x > start.x ? { x: (x + end.x) / 2, y: end.y } : { x: (x + start.x) / 2, y: start.y },
   };
 }
 

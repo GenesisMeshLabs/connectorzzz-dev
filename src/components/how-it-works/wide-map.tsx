@@ -134,7 +134,7 @@ export function WideMap({
         {edges.map(({ relation, shown, lit, geometry }) => {
           const bridge = relation.kind === "bridge";
           const accent = lit || (bridge && !emphasis);
-          const opacity = !shown ? 0 : emphasis && !lit ? 0.12 : 1;
+          const opacity = !shown ? 0 : emphasis && !lit ? 0.08 : 1;
           const moving = relation.kind === "flow" || bridge;
 
           return (
@@ -146,13 +146,17 @@ export function WideMap({
               <path
                 d={geometry.d}
                 fill="none"
-                className={accent ? "hiw-edge hiw-edge-accent" : "hiw-edge"}
+                className={["hiw-edge", accent ? "hiw-edge-accent" : "", lit ? "hiw-edge-lit" : ""].join(" ")}
                 strokeDasharray={bridge || relation.kind === "reference" ? "5 5" : undefined}
-                strokeWidth={lit ? 1.8 : 1.3}
+                strokeWidth={lit ? 2.2 : 1.3}
                 markerEnd={relation.kind === "detail" ? undefined : `url(#${accent ? "hiw-arrow-accent" : "hiw-arrow"})`}
               />
               {moving && shown ? (
-                <path d={geometry.d} fill="none" className={accent ? "hiw-flow hiw-flow-accent" : "hiw-flow"} />
+                <path
+                  d={geometry.d}
+                  fill="none"
+                  className={["hiw-flow", accent ? "hiw-flow-accent" : "", lit ? "hiw-flow-lit" : ""].join(" ")}
+                />
               ) : null}
             </g>
           );
@@ -160,13 +164,16 @@ export function WideMap({
       </svg>
 
       {edges
-        .filter(
-          ({ shown, lit, relation }) =>
-            shown &&
-            lit &&
-            relation.label &&
-            (labelAllLit || focus.has(relation.from) || focus.has(relation.to)),
-        )
+        .filter(({ shown, lit, relation }) => {
+          if (!shown || !relation.label) {
+            return false;
+          }
+          // At rest only the key bridges are labelled; focus reveals the rest.
+          if (!emphasis) {
+            return Boolean(relation.primary);
+          }
+          return lit && (labelAllLit || focus.has(relation.from) || focus.has(relation.to));
+        })
         .map(({ relation, geometry }) => (
           <span
             key={`label-${relation.from}-${relation.to}`}
@@ -202,6 +209,7 @@ function MapNode({ node, interaction }: { node: NodeBox; interaction: MapInterac
   const { view, highlight, selectedId, expanded, onSelect, onHover, onToggle } = interaction;
   const shown = !node.hidden && idInView(node.id, view);
   const dimmed = highlight.size > 0 && !highlight.has(node.id);
+  const lit = highlight.size > 0 && highlight.has(node.id);
   const selected = selectedId === node.id;
   const open = expanded.has(node.id);
 
@@ -209,7 +217,7 @@ function MapNode({ node, interaction }: { node: NodeBox; interaction: MapInterac
     width: node.w,
     height: node.h,
     transform: `translate(${node.x}px, ${node.y}px)`,
-    opacity: shown ? (dimmed ? 0.35 : 1) : 0,
+    opacity: shown ? (dimmed ? 0.28 : 1) : 0,
   };
 
   if (node.kind === "group") {
@@ -220,10 +228,10 @@ function MapNode({ node, interaction }: { node: NodeBox; interaction: MapInterac
           type="button"
           onClick={() => onToggle(node.id)}
           aria-expanded={open}
-          className="flex h-full w-full items-center justify-between gap-3 rounded-lg border border-dashed border-ink/25 bg-surface px-4 text-left transition hover:border-accent-ink/70"
+          className="flex h-full w-full items-center justify-between gap-2 rounded-lg border border-dashed border-ink/25 bg-surface px-3.5 text-left transition hover:border-accent-ink/70"
         >
           <span className="min-w-0">
-            <span className="block text-[13px] leading-5 font-semibold text-ink">{group.name}</span>
+            <span className="block text-[13px] leading-[1.15rem] font-semibold text-ink">{group.name}</span>
             <span className="block text-xs text-ink-400">
               {node.detailCount} concepts · {open ? "hide" : "show"}
             </span>
@@ -262,7 +270,9 @@ function MapNode({ node, interaction }: { node: NodeBox; interaction: MapInterac
           node.detailCount > 0 ? "pb-2" : "",
           selected
             ? "border-accent-ink bg-surface shadow-[0_0_0_3px_color-mix(in_oklab,var(--accent)_28%,transparent)]"
-            : isDetail
+            : lit
+              ? "hiw-node-lit border-accent-ink/60 bg-surface"
+              : isDetail
               ? "border-ink/15 bg-surface-raised hover:border-accent-ink/70"
               : "border-ink/15 bg-surface hover:border-accent-ink/70",
         ].join(" ")}

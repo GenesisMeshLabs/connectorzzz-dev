@@ -206,6 +206,22 @@ html {
   stroke-opacity: 1;
 }
 
+.hiw-edge-lit {
+  stroke-opacity: 1;
+  filter: drop-shadow(0 0 3px color-mix(in oklab, var(--accent) 70%, transparent));
+}
+
+.hiw-flow-lit {
+  stroke-width: 3.4;
+  animation-duration: 0.9s;
+}
+
+.hiw-node-lit {
+  box-shadow:
+    0 0 0 1px color-mix(in oklab, var(--accent) 35%, transparent),
+    0 0 22px -6px color-mix(in oklab, var(--accent) 55%, transparent);
+}
+
 .hiw-drop {
   animation: hiw-drop 1.8s ease-in infinite;
 }
@@ -232,7 +248,23 @@ html {
 
 @media (prefers-reduced-motion: reduce) {
   .hiw-flow,
-  .hiw-drop {
+  .hiw-edge-lit {
+  stroke-opacity: 1;
+  filter: drop-shadow(0 0 3px color-mix(in oklab, var(--accent) 70%, transparent));
+}
+
+.hiw-flow-lit {
+  stroke-width: 3.4;
+  animation-duration: 0.9s;
+}
+
+.hiw-node-lit {
+  box-shadow:
+    0 0 0 1px color-mix(in oklab, var(--accent) 35%, transparent),
+    0 0 22px -6px color-mix(in oklab, var(--accent) 55%, transparent);
+}
+
+.hiw-drop {
     animation: none;
   }
 

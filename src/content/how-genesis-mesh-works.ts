@@ -46,6 +46,8 @@ export type Relation = {
   to: string;
   label: string;
   kind: RelationKind;
+  /** One of the few relationships labelled on the map by default. */
+  primary?: boolean;
 };
 
 export type StageNode = {
@@ -134,7 +136,7 @@ export const howItWorksPage = {
   title: "How Genesis Mesh Works",
   lead: "Genesis Mesh is easier to understand as a connected trust model than as a list of isolated terms.",
   hint: "Select any concept to see what it is, where it fits, and a real-world analogy.",
-  textIndexTitle: "Read this view as text",
+  textIndexTitle: "Explore all concepts as text",
 };
 
 export const fullModelIntro: { lead: string[]; chain: string[] } = {
@@ -205,10 +207,9 @@ export const mentalModel: { title: string; outro: string; steps: MentalModelStep
 };
 
 export const groups: Group[] = [
-  {
-    id: "advanced",
-    name: "Advanced authorization and trust observability",
-  },
+  { id: "advanced-authorization", name: "Advanced Authorization" },
+  { id: "trust-observability", name: "Trust Observability" },
+  { id: "technical-foundations", name: "Technical Foundations" },
   {
     id: "supporting",
     name: "Supporting concepts",
@@ -277,20 +278,17 @@ export const stories: Story[] = [
         continues: true,
         nodes: [
           {
-            id: "advanced",
-            at: 0.5,
+            id: "advanced-authorization",
             details: [
               "ibct",
               "human-oversight",
               "consensus-authorization",
               "selective-disclosure",
               "model-attestation",
-              "recognition-graph",
-              "connectome",
-              "policy-manifest",
-              "canonical-json",
             ],
           },
+          { id: "trust-observability", details: ["recognition-graph", "connectome"] },
+          { id: "technical-foundations", details: ["policy-manifest", "canonical-json"] },
         ],
       },
     ],
@@ -1341,15 +1339,15 @@ export const relations: Relation[] = [
   { from: "network-authority", to: "join-certificate", label: "signs", kind: "reference" },
   { from: "recognition-treaty", to: "recognition-policy", label: "accepted through", kind: "detail" },
   { from: "sovereign-revocation-feed", to: "freshness-proof", label: "proved current by", kind: "detail" },
-  { from: "advanced", to: "ibct", label: "", kind: "detail" },
-  { from: "advanced", to: "human-oversight", label: "", kind: "detail" },
-  { from: "advanced", to: "consensus-authorization", label: "", kind: "detail" },
-  { from: "advanced", to: "selective-disclosure", label: "", kind: "detail" },
-  { from: "advanced", to: "model-attestation", label: "", kind: "detail" },
-  { from: "advanced", to: "recognition-graph", label: "", kind: "detail" },
-  { from: "advanced", to: "connectome", label: "", kind: "detail" },
-  { from: "advanced", to: "policy-manifest", label: "", kind: "detail" },
-  { from: "advanced", to: "canonical-json", label: "", kind: "detail" },
+  { from: "advanced-authorization", to: "ibct", label: "", kind: "detail" },
+  { from: "advanced-authorization", to: "human-oversight", label: "", kind: "detail" },
+  { from: "advanced-authorization", to: "consensus-authorization", label: "", kind: "detail" },
+  { from: "advanced-authorization", to: "selective-disclosure", label: "", kind: "detail" },
+  { from: "advanced-authorization", to: "model-attestation", label: "", kind: "detail" },
+  { from: "trust-observability", to: "recognition-graph", label: "", kind: "detail" },
+  { from: "trust-observability", to: "connectome", label: "", kind: "detail" },
+  { from: "technical-foundations", to: "policy-manifest", label: "", kind: "detail" },
+  { from: "technical-foundations", to: "canonical-json", label: "", kind: "detail" },
   { from: "recognition-treaty", to: "recognition-graph", label: "forms", kind: "reference" },
   { from: "recognition-graph", to: "connectome", label: "derived view", kind: "reference" },
   { from: "agent", to: "model-attestation", label: "bound to approved configuration", kind: "reference" },
@@ -1388,11 +1386,11 @@ export const relations: Relation[] = [
   { from: "metadata-guard", to: "evidence-store", label: "keeps secrets out", kind: "reference" },
 
   // Bridges: Foundation trust → Governed Action
-  { from: "network-authority", to: "membership-attestation", label: "manages attestations", kind: "bridge" },
-  { from: "network-authority", to: "boundary-engine", label: "evaluates policy", kind: "bridge" },
-  { from: "network-authority", to: "boundary-decision", label: "signs decisions", kind: "bridge" },
-  { from: "network-authority", to: "evidence-store", label: "stores evidence", kind: "bridge" },
-  { from: "operator-key", to: "boundary-policy", label: "publishes policy", kind: "bridge" },
+  { from: "network-authority", to: "membership-attestation", label: "manages attestations", kind: "bridge", primary: true },
+  { from: "network-authority", to: "boundary-engine", label: "evaluates policy", kind: "bridge", primary: true },
+  { from: "network-authority", to: "boundary-decision", label: "signs decisions", kind: "bridge", primary: true },
+  { from: "network-authority", to: "evidence-store", label: "stores evidence", kind: "bridge", primary: true },
+  { from: "operator-key", to: "boundary-policy", label: "publishes policy", kind: "bridge", primary: true },
   { from: "operator-key", to: "executor-identity", label: "registers executor identities", kind: "bridge" },
   { from: "operator-key", to: "membership-attestation", label: "issues or revokes attestations", kind: "reference" },
   { from: "recognition-policy", to: "membership-attestation", label: "accepts external attestations", kind: "bridge" },
