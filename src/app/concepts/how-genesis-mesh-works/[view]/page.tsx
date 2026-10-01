@@ -54,6 +54,14 @@ export default async function HowGenesisMeshWorksViewPage({ params }: Params) {
 
   return (
     <>
+      {/*
+        The explorer lives in the shared layout, so this segment's visible
+        content (the text index) sits at the bottom. After a client-side
+        navigation Next.js scrolls the segment's first visible element into
+        view; this marker pins that element to the top of the section so
+        arriving from another page starts at the top, not the bottom.
+      */}
+      <span aria-hidden="true" className="pointer-events-none absolute inset-x-0 top-0 h-px" />
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
       <ConceptIndex view={view} />
       <div className="mt-10 flex flex-col gap-3 sm:flex-row">
