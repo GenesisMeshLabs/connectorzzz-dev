@@ -56,14 +56,11 @@ export function ConceptPanel({
   view,
   onClose,
   onSelect,
-  variant = "stack",
 }: {
   concept: Concept;
   view: ViewId;
   onClose: () => void;
   onSelect: (id: string) => void;
-  /** `dock` lays the sections out side by side for the wide Full Model dock. */
-  variant?: "stack" | "dock";
 }) {
   const { inView, elsewhere } = relationsOf(concept.id, view);
   // Detail links are already listed under "Inside this concept" / "Part of".
@@ -106,7 +103,7 @@ export function ConceptPanel({
         </button>
       </header>
 
-      <div className={variant === "dock" ? "grid gap-x-8 gap-y-5 lg:grid-cols-3" : "grid gap-5"}>
+      <div className="grid gap-5">
         <Section icon={Info} title="What it is">
           <Blocks blocks={concept.whatItIs} />
         </Section>
@@ -203,13 +200,7 @@ export function ConceptPanel({
         ) : null}
 
         {previous || next ? (
-          <nav
-            aria-label="Story order"
-            className={[
-              "grid grid-cols-2 gap-2 border-t border-ink/10 pt-5",
-              variant === "dock" ? "lg:col-span-3 lg:max-w-xl" : "",
-            ].join(" ")}
-          >
+          <nav aria-label="Story order" className="grid grid-cols-2 gap-2 border-t border-ink/10 pt-5">
             {previous ? (
               <button
                 type="button"
