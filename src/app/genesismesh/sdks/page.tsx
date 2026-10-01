@@ -25,7 +25,7 @@ export default function SdksPage() {
             href={siteLinks.githubOrg}
             target="_blank"
             rel="noreferrer"
-            className="inline-flex h-12 items-center justify-center gap-2 rounded-md bg-[#d9ff61] px-5 text-sm font-bold text-zinc-950 transition hover:bg-white"
+            className="inline-flex h-12 items-center justify-center gap-2 rounded-md bg-accent px-5 text-sm font-bold text-on-accent transition hover:bg-tile"
           >
             <BrandIcon name="github" className="h-5 w-5" />
             Open repositories
@@ -43,17 +43,17 @@ export default function SdksPage() {
               className="group link-card"
             >
               <div className="flex items-center justify-between">
-                <div className="flex h-14 w-14 items-center justify-center rounded-md bg-white text-zinc-950 transition group-hover:bg-[#d9ff61]">
+                <div className="flex h-14 w-14 items-center justify-center rounded-md bg-tile text-on-accent transition group-hover:bg-accent">
                   <sdk.icon size={28} aria-hidden="true" />
                 </div>
-                <span className="rounded-md bg-white/10 px-3 py-1 text-xs font-semibold text-zinc-300">
+                <span className="rounded-md bg-ink/10 px-3 py-1 text-xs font-semibold text-ink-300">
                   {sdk.language}
                 </span>
               </div>
-              <h2 className="mt-6 text-xl font-semibold text-white">{sdk.name}</h2>
-              <p className="mt-2 font-mono text-xs text-[#d9ff61]">{sdk.repo}</p>
-              <p className="mt-3 text-sm leading-6 text-zinc-400">{sdk.description}</p>
-              <span className="mt-6 inline-flex items-center gap-2 text-sm font-bold text-[#d9ff61]">
+              <h2 className="mt-6 text-xl font-semibold text-ink">{sdk.name}</h2>
+              <p className="mt-2 font-mono text-xs text-accent-ink">{sdk.repo}</p>
+              <p className="mt-3 text-sm leading-6 text-ink-400">{sdk.description}</p>
+              <span className="mt-6 inline-flex items-center gap-2 text-sm font-bold text-accent-ink">
                 View repository
                 <ArrowUpRight size={16} aria-hidden="true" />
               </span>
@@ -63,10 +63,10 @@ export default function SdksPage() {
 
         <div className="soft-card mt-10 grid gap-6 p-6 lg:grid-cols-[.75fr_1fr] lg:items-center">
           <div>
-            <div className="flex h-12 w-12 items-center justify-center rounded-md bg-[#d9ff61] text-zinc-950">
+            <div className="flex h-12 w-12 items-center justify-center rounded-md bg-accent text-on-accent">
               <Code2 size={24} aria-hidden="true" />
             </div>
-            <h2 className="mt-5 text-xl font-semibold text-white">
+            <h2 className="mt-5 text-xl font-semibold text-ink">
               Protocol first, SDK assisted.
             </h2>
             <p className="muted-copy mt-3">
@@ -76,9 +76,9 @@ export default function SdksPage() {
           <div className="grid gap-3 sm:grid-cols-3">
             {["Conformance stays shared", "Recognition stays portable", "Revocation stays verifiable"].map(
               (item) => (
-                <div key={item} className="rounded-md border border-white/10 bg-[#070807] p-4">
-                  <CheckCircle2 className="text-[#d9ff61]" size={18} aria-hidden="true" />
-                  <p className="mt-3 text-sm font-semibold leading-6 text-zinc-200">{item}</p>
+                <div key={item} className="rounded-md border border-ink/10 bg-canvas p-4">
+                  <CheckCircle2 className="text-accent-ink" size={18} aria-hidden="true" />
+                  <p className="mt-3 text-sm font-semibold leading-6 text-ink-200">{item}</p>
                 </div>
               ),
             )}

@@ -10,7 +10,13 @@ dev.connectorzzz.com/genesismesh
 dev.connectorzzz.com/genesismesh/sdks
 dev.connectorzzz.com/genesismesh/videos
 dev.connectorzzz.com/genesismesh/articles
+dev.connectorzzz.com/concepts/how-genesis-mesh-works/foundation
+dev.connectorzzz.com/concepts/how-genesis-mesh-works/governed-action
+dev.connectorzzz.com/concepts/how-genesis-mesh-works/full-model
 ```
+
+`/concepts/how-genesis-mesh-works` redirects to the Foundation view. Concepts are
+deep-linkable by fragment, e.g. `/foundation#recognition-treaty`.
 
 This repository is intended to be public. Do not commit local environment files,
 generated screenshots, deployment credentials, or private campaign drafts.
@@ -48,6 +54,13 @@ Public content indexes are fetched server-side:
 - YouTube videos use the public GenesisMesh Labs channel feed.
 - Patreon articles are discovered from public GenesisMesh Labs post links.
 - Both pages fall back to curated local content if a public feed or page is unavailable.
+
+How Genesis Mesh Works concepts, relationships, stages, and the mental-model
+questions live in one file; the three views are filters over it:
+
+```text
+src/content/how-genesis-mesh-works.ts
+```
 
 Shared UI sections live in:
 

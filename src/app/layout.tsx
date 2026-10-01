@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
+import { themeBootstrapScript } from "@/lib/theme";
 import { siteConfig, siteLinks } from "@/content/site";
 import "./globals.css";
 
@@ -71,7 +72,11 @@ export default function RootLayout({
     <html
       lang="en"
       className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}
+      suppressHydrationWarning
     >
+      <head>
+        <script dangerouslySetInnerHTML={{ __html: themeBootstrapScript }} />
+      </head>
       <body className="flex min-h-full flex-col">{children}</body>
     </html>
   );

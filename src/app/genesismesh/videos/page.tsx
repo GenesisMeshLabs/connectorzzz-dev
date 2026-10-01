@@ -31,7 +31,7 @@ export default async function VideosPage() {
             href={siteLinks.youtube}
             target="_blank"
             rel="noreferrer"
-            className="inline-flex h-12 items-center justify-center gap-2 rounded-md bg-[#d9ff61] px-5 text-sm font-bold text-zinc-950 transition hover:bg-white"
+            className="inline-flex h-12 items-center justify-center gap-2 rounded-md bg-accent px-5 text-sm font-bold text-on-accent transition hover:bg-tile"
           >
             <BrandIcon name="youtube" className="h-5 w-5" />
             Subscribe on YouTube
@@ -60,16 +60,16 @@ export default async function VideosPage() {
                     sizes="(min-width: 1280px) 33vw, (min-width: 768px) 50vw, 100vw"
                   />
                   <div className="absolute inset-0 bg-black/20 transition group-hover:bg-black/10" />
-                  <div className="absolute right-3 top-3 flex h-10 w-10 items-center justify-center rounded-md bg-[#d9ff61] text-zinc-950 shadow-lg shadow-black/30 transition group-hover:bg-white sm:right-4 sm:top-4 sm:h-12 sm:w-12">
+                  <div className="absolute right-3 top-3 flex h-10 w-10 items-center justify-center rounded-md bg-accent text-on-accent shadow-lg shadow-black/30 transition group-hover:bg-tile sm:right-4 sm:top-4 sm:h-12 sm:w-12">
                     <Play size={21} fill="currentColor" aria-hidden="true" className="ml-0.5" />
                   </div>
                 </div>
                 <div className="p-5">
-                  <p className="text-xs font-semibold uppercase tracking-[0.16em] text-zinc-500">
+                  <p className="text-xs font-semibold uppercase tracking-[0.16em] text-ink-500">
                     {video.published}
                   </p>
-                  <h2 className="mt-2 text-xl font-semibold text-white">{video.title}</h2>
-                  <p className="mt-3 text-sm leading-6 text-zinc-400">{video.summary}</p>
+                  <h2 className="mt-2 text-xl font-semibold text-ink">{video.title}</h2>
+                  <p className="mt-3 text-sm leading-6 text-ink-400">{video.summary}</p>
                 </div>
               </a>
             </article>
