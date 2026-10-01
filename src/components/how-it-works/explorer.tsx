@@ -209,9 +209,9 @@ export function HowItWorksExplorer() {
             return;
           }
           const box = node.getBoundingClientRect();
-          if (box.bottom > window.innerHeight * 0.5 || box.top < 80) {
+          if (box.bottom > window.innerHeight * 0.55 || box.top < 80) {
             window.scrollBy({
-              top: box.top - window.innerHeight * 0.22,
+              top: box.top - window.innerHeight * 0.3,
               behavior: reducedMotion ? "auto" : "smooth",
             });
           }
@@ -384,7 +384,7 @@ export function HowItWorksExplorer() {
           style={{
             height: stageHeight,
             // Room for the dock, so it never covers the end of the map.
-            marginBottom: dockOpen ? "calc(46svh + 1rem)" : 0,
+            marginBottom: dockOpen ? "calc(40svh + 1rem)" : 0,
             transition: animate
               ? "height 700ms cubic-bezier(0.22, 0.8, 0.24, 1), margin-bottom 300ms ease"
               : undefined,
@@ -419,7 +419,7 @@ export function HowItWorksExplorer() {
         <div className="sticky bottom-4 z-30 h-0">
           <aside
             aria-label="Concept explanation"
-            className="absolute inset-x-0 bottom-0 max-h-[46svh] overflow-y-auto overscroll-contain rounded-xl border border-ink/15 bg-surface p-6 shadow-2xl shadow-black/40"
+            className="absolute inset-x-0 bottom-0 max-h-[40svh] overflow-y-auto overscroll-contain rounded-xl border border-ink/15 bg-surface p-6 shadow-2xl shadow-black/40"
             style={{
               opacity: dockOpen ? 1 : 0,
               transform: dockOpen ? "none" : "translateY(24px)",
